@@ -1,4 +1,5 @@
 const db = require('./db/db');
+const { products } = require('./db/db');
 
 function initialize() {
 	db.sequelize.sync({ force: true }).then(function () {
@@ -19,14 +20,14 @@ function dataInit() {
         billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'})
     ];
     const ordersPromiseList = [
-        db.orders.create({id: 1, email: "Hhamo@gmail.com",password: "Hhamo",full_name: "Hamo Hamic", billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'}),
+        db.orders.create({id: 1,customer_id:1,ammount:59,shipping_address: 'Titova 99',order_address: 'Bakije sokak 33', order_email: "Hhamo@gmail.com",order_date: "28.04.2020",  order_status: 'ordered' , payment_method:'handover'}),
     ];
     const orders_detailsPromiseList = [
-        db.orders.create({id: 1, email: "Hhamo@gmail.com",password: "Hhamo",full_name: "Hamo Hamic", billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'}),
+        db.orders.create({id: 1, order_id:1 , product_id: 1 , price: 59 , quantity: 5 })
     ];
     
-    const orders_detailsPromiseList = [
-        db.orders.create({id: 1, email: "Hhamo@gmail.com",password: "Hhamo",full_name: "Hamo Hamic", billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'}),
+    const product_imagesPromiseList = [
+        db.product_images.create({id: 1,product_id:1,image:'/images/1.png'})
     ];
 
     const categoriesPromiseListe = [
@@ -39,10 +40,11 @@ function dataInit() {
 
     return new Promise((resolve, reject) => {
         Promise.all(usersPromiseList)
-            /*.then(() => Promise.all(technical_reviewsPromiseList).then(all => resolve(all))) 
-            .then(() => Promise.all(partsPromiseList).then(all => resolve(all)))
-            .then(() => Promise.all(vehiclesPromiseList).then(all => resolve(all)))
-            .then(() => Promise.all(failuresPromiseList).then(all => resolve(all)))*/
+            .then(() => Promise.all(categoriesPromiseListe).then(all => resolve(all))) 
+            .then(() => Promise.all(ordersPromiseList).then(all => resolve(all)))
+            .then(() => Promise.all(orders_detailsPromiseList).then(all => resolve(all)))
+            .then(() => Promise.all(productsPromiseList).then(all => resolve(all)))
+            .then(() => Promise.all(product_imagesPromiseList).then(all => resolve(all)))
             .catch(reason => reject(reason));
     });
 }
