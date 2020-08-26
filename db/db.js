@@ -87,12 +87,29 @@ db.orders.belongsTo(db.users, {
 });
 
 // 6) Asociation
-
+db.product_categories.hasMany(db.products, {
+    foreignKey: {
+        name: 'product_id'
+    }
+});
+db.products.belongsTo(db.product_categories, {
+    as: 'userOrder',
+    foreignKey: {
+        name: 'product_id'
+    }
+});
 
 // 7) Asociation
-
-
-
-
+db.categories.hasMany(db.products_categories, {
+    foreignKey: {
+        name: 'category_id'
+    }
+});
+db.products_categories.belongsTo(db.categories, {
+    as: 'productsCategory',
+    foreignKey: {
+        name: 'category_id'
+    }
+});
 
 module.exports = db;
