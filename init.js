@@ -1,5 +1,5 @@
 const db = require('./db/db');
-const { products } = require('./db/db');
+const { products, product_categories } = require('./db/db');
 
 function initialize() {
 	db.sequelize.sync({ force: true }).then(function () {
@@ -29,7 +29,7 @@ function dataInit() {
     const product_imagesPromiseList = [
         db.product_images.create({id: 1,product_id:1,image:'/images/1.png'})
     ];
-
+    
     const categoriesPromiseListe = [
         db.categories.create({id:1 , name: 'male' , description: 'blaa'}),
         db.categories.create({id:2 , name: 'fimale' , description: 'blaa'}),
@@ -37,15 +37,19 @@ function dataInit() {
         db.categories.create({id:4 , name: 'tech' , description: 'blaa'})
     ];
     
-
+    const product_categoriesPromiseList = [
+        db.product_images.create({id: 1,product_id:1,category_id:1})
+    ];
+    
     return new Promise((resolve, reject) => {
         Promise.all(usersPromiseList)
-            .then(() => Promise.all(categoriesPromiseListe).then(all => resolve(all))) 
-            .then(() => Promise.all(ordersPromiseList).then(all => resolve(all)))
-            .then(() => Promise.all(orders_detailsPromiseList).then(all => resolve(all)))
-            .then(() => Promise.all(productsPromiseList).then(all => resolve(all)))
-            .then(() => Promise.all(product_imagesPromiseList).then(all => resolve(all)))
-            .catch(reason => reject(reason));
+        .then(() => Promise.all(productsPromiseList).then(all => resolve(all)))
+        .then(() => Promise.all(categoriesPromiseListe).then(all => resolve(all))) 
+        .then(() => Promise.all(product_imagesPromiseList).then(all => resolve(all)))
+        .then(() => Promise.all(ordersPromiseList).then(all => resolve(all)))
+        .then(() => Promise.all(orders_detailsPromiseList).then(all => resolve(all)))
+        .then(() => Promise.all(product_categoriesPromiseList).then(all => resolve(all)))
+        .catch(reason => reject(reason));
     });
 }
 

@@ -100,12 +100,12 @@ db.products.belongsTo(db.product_categories, {
 });
 
 // 7) Asociation
-db.categories.hasMany(db.products_categories, {
+db.categories.hasMany(db.product_categories, {
     foreignKey: {
         name: 'category_id'
     }
 });
-db.products_categories.belongsTo(db.categories, {
+db.product_categories.belongsTo(db.categories, {
     as: 'productsCategory',
     foreignKey: {
         name: 'category_id'
