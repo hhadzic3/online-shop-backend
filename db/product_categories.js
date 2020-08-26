@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('products', {
+    return sequelize.define('product_categories', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -9,16 +9,11 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true
         },
-        seller_id : DataTypes.INTEGER,
-        name: DataTypes.STRING,
-        price: DataTypes.INTEGER,
-        weight: DataTypes.INTEGER,
-        descripions: DataTypes.STRING,
-        //category: DataTypes.STRING,
-        stock: DataTypes.INTEGER
+        product_id: DataTypes.INTEGER,
+        category_id: DataTypes.INTEGER
     }, {
         sequelize,
-        tableName: 'products',
+        tableName: 'product_categories',
         timestamps: false,
         underscored: true
     }

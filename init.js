@@ -11,8 +11,8 @@ function initialize() {
 
 function dataInit() {
     const productsPromiseList = [
-        db.parts.create({id: 1,seller_id:1 ,name: 'Majica NIKE', price: 59 , weight: 1 , description: 'blaaa blaaa', category:'clothes' , stock: 4}),
-        db.parts.create({id: 2,seller_id:1 ,name: 'Iphone 11', price: 59 , weight: 1 , description: 'blaaa blaaa', category:'clothes' , stock: 4 })
+        db.parts.create({id: 1,seller_id:1 ,name: 'Majica NIKE', price: 59 , weight: 1 , description: 'blaaa blaaa' , stock: 4}),
+        db.parts.create({id: 2,seller_id:1 ,name: 'Iphone 11', price: 59 , weight: 1 , description: 'blaaa blaaa', stock: 4 })
     ];
     const usersPromiseList = [
         db.users.create({id: 1, email: "Hhamo@gmail.com",password: "Hhamo",full_name: "Hamo Hamic", billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'}),
