@@ -19,11 +19,7 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             unique: true
         },
-        full_name: DataTypes.STRING,
-        billing_address: DataTypes.STRING,
-        shipping_address: DataTypes.STRING,
-        country: DataTypes.STRING,
-        phone: DataTypes.STRING
+        full_name: DataTypes.STRING
     }, {
         sequelize,
         tableName: 'users',
