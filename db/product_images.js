@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('users', {
+    return sequelize.define('product_images', {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -9,20 +9,11 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true
         },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
-        },
-        full_name: DataTypes.STRING
+        product_id: DataTypes.INTEGER,
+        image: DataTypes.STRING
     }, {
         sequelize,
-        tableName: 'users',
+        tableName: 'product_images',
         timestamps: false,
         underscored: true
     }
