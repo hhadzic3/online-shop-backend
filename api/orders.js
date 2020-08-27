@@ -17,7 +17,7 @@ router.delete('/:id' , (req, res) => db.orders.destroy({
 
 // POST
 router.post('/' , function(req, res)  {
-    if ( !req.body.order_email)
+    if ( !req.body.ammount)
         res.json({ error: 'Bad Data'})
     db.orders.create(req.body).then( data => { res.send(data) });
 });

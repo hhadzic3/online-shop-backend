@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
         name: DataTypes.STRING,
         price: DataTypes.INTEGER,
         weight: DataTypes.INTEGER,
-        descripions: DataTypes.STRING,
+        description: DataTypes.STRING,
         //category: DataTypes.STRING,
         stock: DataTypes.INTEGER
     }, {

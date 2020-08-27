@@ -46,8 +46,8 @@ function dataInit() {
         .then(() => Promise.all(productsPromiseList).then(all => resolve(all)))
         .then(() => Promise.all(ordersPromiseList).then(all => resolve(all)))
         .then(() => Promise.all(product_categoriesPromiseList).then(all => resolve(all)))
-        .then(() => Promise.all(product_imagesPromiseList).then(all => resolve(all)))
         .then(() => Promise.all(order_detailsPromiseList).then(all => resolve(all)))
+        .then(() => Promise.all(product_imagesPromiseList).then(all => resolve(all)))
         .catch(reason => reject(reason));
     });
 }

@@ -28,5 +28,5 @@ app.get('/', function (req, res) {
 
 module.exports = app.listen(/*process.env.PORT ||*/ 8080, () => {
     console.log('Server is working on http://localhost:8080');
-	//db.initialize();
+	db.initialize();
 });

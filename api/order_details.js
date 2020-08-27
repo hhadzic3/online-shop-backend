@@ -21,5 +21,4 @@ router.post('/' , function(req, res)  {
     db.order_details.create(req.body).then( data => { res.send(data) });
 });
 
-
 module.exports = router;

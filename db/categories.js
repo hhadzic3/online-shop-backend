@@ -9,8 +9,8 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             autoIncrement: true
         },
-        product_id: DataTypes.INTEGER,
-        name: DataTypes.STRING
+        name: DataTypes.STRING,
+        description: DataTypes.STRING
     }, {
         sequelize,
         tableName: 'categories',

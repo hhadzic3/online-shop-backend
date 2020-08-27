@@ -86,13 +86,13 @@ db.orders.belongsTo(db.users, {
     }
 });
 
-// 6) Asociation
-db.product_categories.hasMany(db.products, {
+// 6) Asociation -> todo: obratiti paznju na ovu vezu   
+db.products.hasMany(db.product_categories, {
     foreignKey: {
         name: 'product_id'
     }
 });
-db.products.belongsTo(db.product_categories, {
+db.product_categories.belongsTo(db.products, {
     as: 'userOrder',
     foreignKey: {
         name: 'product_id'

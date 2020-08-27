@@ -25,7 +25,7 @@ router.post('/' , function(req, res)  {
 
 // PUT
 router.put('/:id' , function(req, res)  {
-    if ( !req.body.state )
+    if ( !req.body.name )
         res.json({ error: 'Bad Data' })
     
     var v = req.body;
