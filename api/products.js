@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require('../db/db');
 
 
-router.get('/', (req, res) => db.product_images.findAll().then(product_images => res.json(product_images)));
+router.get('/', (req, res) => db.products.findAll().then(products => res.json(products)));
 
 
 module.exports = router;
