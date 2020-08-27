@@ -9,4 +9,11 @@ router.get('/:id', (req, res) => db.orders.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data) })   
 );
 
+// DELETE
+router.delete('/:id' , (req, res) => db.orders.destroy({
+    where: {   id: req.params.id     }
+ }).then( () => { res.json({ status : 'Deleted!'}) })  
+);
+
+
 module.exports = router;

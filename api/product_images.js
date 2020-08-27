@@ -8,4 +8,13 @@ router.get('/:id', (req, res) => db.product_images.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data) })   
 );
 
+// DELETE
+router.delete('/:id' , (req, res) => db.product_images.destroy({
+    where: {   id: req.params.id     }
+ }).then( () => { res.json({ status : 'Deleted!'}) })  
+);
+
+
+
+
 module.exports = router;
