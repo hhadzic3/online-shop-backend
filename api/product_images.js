@@ -14,6 +14,13 @@ router.delete('/:id' , (req, res) => db.product_images.destroy({
  }).then( () => { res.json({ status : 'Deleted!'}) })  
 );
 
+// POST
+router.post('/' , function(req, res)  {
+    if ( !req.body.image)
+        res.json({ error: 'Bad Data'})
+    db.product_images.create(req.body).then( data => { res.send(data) });
+});
+
 
 
 

@@ -15,5 +15,12 @@ router.delete('/:id' , (req, res) => db.orders.destroy({
  }).then( () => { res.json({ status : 'Deleted!'}) })  
 );
 
+// POST
+router.post('/' , function(req, res)  {
+    if ( !req.body.order_email)
+        res.json({ error: 'Bad Data'})
+    db.orders.create(req.body).then( data => { res.send(data) });
+});
+
 
 module.exports = router;

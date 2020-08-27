@@ -14,6 +14,12 @@ router.delete('/:id' , (req, res) => db.order_details.destroy({
  }).then( () => { res.json({ status : 'Deleted!'}) })  
 );
 
+// POST
+router.post('/' , function(req, res)  {
+    if ( !req.body.price)
+        res.json({ error: 'Bad Data'})
+    db.order_details.create(req.body).then( data => { res.send(data) });
+});
 
 
 module.exports = router;
