@@ -13,6 +13,13 @@ router.get('/:id', (req, res) => db.users.findOne({
     where: {   id: req.params.id } , attributes: {exclude: ['password']}}).then( data => { res.send(data) })   
 );
 
+// DELETE
+router.delete('/:id' , (req, res) => db.users.destroy({
+    where: {   id: req.params.id     }
+ }).then( () => { res.json({ status : 'Deleted!'}) })  
+);
+
+
 router.get('/profile', (req, res) => {
     var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
     
@@ -57,7 +64,7 @@ router.post('/register', (req, res) => {
     var userData = req.body;
 db.users.findOne({
     where: {
-        mail: req.body.mail
+        email: req.body.email
     }
 }).then(user => {
     if (!user) {

@@ -18,14 +18,14 @@ router.delete('/:id' , (req, res) => db.products.destroy({
 
 // POST
 router.post('/' , function(req, res)  {
-    if ( !req.body.name)
+    if ( !req.body.stock)
         res.json({ error: 'Bad Data'})
     db.products.create(req.body).then( data => { res.send(data) });
 });
 
 // PUT
 router.put('/:id' , function(req, res)  {
-    if ( !req.body.name )
+    if ( !req.body.stock )
         res.json({ error: 'Bad Data' })
     
     var v = req.body;
