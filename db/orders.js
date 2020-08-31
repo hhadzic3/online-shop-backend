@@ -15,7 +15,10 @@ module.exports = function (sequelize, DataTypes) {
         order_address: DataTypes.STRING,
         order_email: DataTypes.STRING,
         order_date: DataTypes.STRING,
-        order_status: DataTypes.STRING,
+        order_status: {
+            type: Sequelize.STRING,
+            validate:{ isIn: [["ordered","unordered"]] }    
+        },
         payment_method: DataTypes.STRING
     }, {
         sequelize,

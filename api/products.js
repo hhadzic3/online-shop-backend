@@ -2,8 +2,19 @@ var express = require('express');
 var router = express.Router();
 const db = require('../db/db');
 
-// GET
-router.get('/', (req, res) => db.products.findAll().then(products => res.json(products)));
+// GET sa query
+router.get('/', (req, res) => { 
+    let l = req.query.label;
+    if (l != undefined){
+        db.products.findAll({
+            where: {label:l}
+        }).then(products => res.json(products))
+    }
+    else {
+        db.products.findAll().then(products => res.json(products))
+    }   
+});
+
 
 router.get('/:id', (req, res) => db.products.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data) })   

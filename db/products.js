@@ -14,7 +14,10 @@ module.exports = function (sequelize, DataTypes) {
         price: DataTypes.INTEGER,
         weight: DataTypes.INTEGER,
         description: DataTypes.STRING,
-        //category: DataTypes.STRING,
+        label: {
+            type: Sequelize.STRING,
+            validate:{ isIn: [["new_arrival","top_rated","last_chance" , "feature" , "classic"]] }
+        },
         stock: DataTypes.INTEGER
     }, {
         sequelize,

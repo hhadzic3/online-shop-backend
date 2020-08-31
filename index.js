@@ -25,8 +25,11 @@ app.use('/api/product_images', product_images);
 app.get('/', function (req, res) {
     res.send("<h1>Welcome to the server side!</h1>");
 });
+app.get('/api', function (req, res) {
+    res.send("<h1>Welcome to the server side!</h1>");
+});
 
 module.exports = app.listen(/*process.env.PORT ||*/ 8080, () => {
     console.log('Server is working on http://localhost:8080');
-	//db.initialize();
+    //db.initialize();
 });
