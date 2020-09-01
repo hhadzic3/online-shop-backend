@@ -18,10 +18,11 @@ router.delete('/:id' , (req, res) => db.categories.destroy({
 router.post('/' , function(req, res)  {
     if ( !req.body.name)
         res.json({ error: 'Bad Data'})
-    db.categories.create(req.body).then( data => { res.send(data) });
+    db.categories.create(req.body).then( data => { res.send(data) })
+    .catch( err => {
+        console.log(err); 
+        res.send(err)
+    })
 });
-
-
-
 
 module.exports = router;

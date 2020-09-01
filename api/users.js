@@ -4,8 +4,6 @@ const db = require('../db/db');
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt'); // pass ne smije biti NUL
 
-process.env.SECRET_KEY = 'secret'
-
 // GET
 router.get('/', (req, res) => db.users.findAll({attributes: {exclude: ['password']}}).then(users => res.json(users)));
 
@@ -61,25 +59,27 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
+    
     var userData = req.body;
-db.users.findOne({
-    where: {
-        email: req.body.email
-    }
-}).then(user => {
-    if (!user) {
-        const hash = bcrypt.hashSync(userData.password , 10)
-        userData.password = hash;
-        db.users.create(userData)
-        .then(user => {
-            let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-            expiresIn: 1440
+    // FIXME: formating
+    db.users.findOne({
+        where: {
+            email: req.body.email
+        }
+    }).then(user => {
+        if (!user) {
+            const hash = bcrypt.hashSync(userData.password , 10)
+            userData.password = hash;
+            db.users.create(userData)
+            .then(user => {
+                let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+                expiresIn: 1440
+                })
+                res.json({ token: token })
             })
-            res.json({ token: token })
-        })
-        .catch(err => {
-            res.send('error: ' + err)
-        })
+            .catch(err => {
+                res.send('error: ' + err)
+            })
     } else {
         res.json({ error: 'User already exists' })
     }

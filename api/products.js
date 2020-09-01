@@ -31,24 +31,32 @@ router.delete('/:id' , (req, res) => db.products.destroy({
 router.post('/' , function(req, res)  {
     if ( !req.body.stock)
         res.json({ error: 'Bad Data'})
-    db.products.create(req.body).then( data => { res.send(data) });
+    db.products.create(req.body).then( data => { res.send(data) })
+    .catch( err => {
+        console.log(err); 
+        res.send(err)
+    })
 });
 
 // PUT
 router.put('/:id' , function(req, res)  {
-    if ( !req.body.stock )
-        res.json({ error: 'Bad Data' })
     
-    var v = req.body;
-    
-    db.products.update({
-        name: v.name,
-        price: v.price,
-        weight: v.weight,
-        description: v.description,
-        stock: v.stock 
-    }, { where: { id: req.params.id } }
-    ).then( () => { res.json({ status : 'Updated!'}) });
+    if (req.params.id != undefined){
+        if ( !req.body.stock )
+            res.json({ error: 'Bad Data' })
+        
+        var v = req.body;
+        
+        db.products.update({
+            name: v.name,
+            price: v.price,
+            weight: v.weight,
+            description: v.description,
+            stock: v.stock 
+        }, { where: { id: req.params.id } }
+        ).then( () => { res.json({ status : 'Updated!'}) });
+    }
+    res.json({ error: 'Error: ID is required!'})
 });
 
 

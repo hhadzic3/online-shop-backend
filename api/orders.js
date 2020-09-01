@@ -19,7 +19,11 @@ router.delete('/:id' , (req, res) => db.orders.destroy({
 router.post('/' , function(req, res)  {
     if ( !req.body.ammount)
         res.json({ error: 'Bad Data'})
-    db.orders.create(req.body).then( data => { res.send(data) });
+    db.orders.create(req.body).then( data => { res.send(data) })
+    .catch( err => {
+        console.log(err); 
+        res.send(err)
+    })
 });
 
 
