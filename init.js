@@ -15,12 +15,20 @@ function dataInit() {
         billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'})
     ];
     const productsPromiseList = [
-        db.products.create({id: 1,seller_id:1 ,name: 'Shirt NIKE', price: 59 , weight: 1 , description: 'blaaa blaaa',label:"classic" , stock: 4}),
-        db.products.create({id: 2,seller_id:2 ,name: 'Iphone 11', price: 59 , weight: 1 , description: 'blaaa blaaa',label:"classic", stock: 4 }),
-        db.products.create({id: 3,seller_id:2 ,name: 'HP laptop Probook', price: 59 , weight: 1 , description: 'blaaa blaaa',label:"last_chance", stock: 1 }),
-        db.products.create({id: 4,seller_id:2 ,name: 'T-shirt', price: 59 , weight: 1 , description: 'blaaa blaaa',label:"top_rated", stock: 4 }),
-        db.products.create({id: 5,seller_id:2 ,name: 'Shoes Addidas', price: 59 , weight: 1 , description: 'blaaa blaaa',label:"new_arrival", stock: 4 }),
-        db.products.create({id: 6,seller_id:2 ,name: 'Gucci glasses', price: 59 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 })
+        db.products.create({id: 1,seller_id:1 ,name: 'Shirt NIKE', price: 49 , weight: 1 , description: 'blaaa blaaa',label:"classic" , stock: 4}),
+        db.products.create({id: 2,seller_id:2 ,name: 'Iphone 11', price: 1009 , weight: 1 , description: 'blaaa blaaa',label:"classic", stock: 4 }),
+        db.products.create({id: 3,seller_id:2 ,name: 'HP laptop Probook', price: 2009 , weight: 1 , description: 'blaaa blaaa',label:"last_chance", stock: 1 }),
+        db.products.create({id: 13,seller_id:2 ,name: 'Macbook PRO laptop Apple', price: 2009 , weight: 1 , description: 'blaaa blaaa',label:"last_chance", stock: 1 }),
+        db.products.create({id: 14,seller_id:2 ,name: 'Macbook AIR laptop Apple', price: 2009 , weight: 1 , description: 'blaaa blaaa',label:"last_chance", stock: 1 }),
+        db.products.create({id: 4,seller_id:2 ,name: 'T-shirt Hugo Boss', price: 59 , weight: 1 , description: 'blaaa blaaa',label:"top_rated", stock: 4 }),
+        db.products.create({id: 11,seller_id:2 ,name: 'T-shirt LV', price: 59 , weight: 1 , description: 'blaaa blaaa',label:"top_rated", stock: 4 }),
+        db.products.create({id: 12,seller_id:2 ,name: 'T-shirt Gucci', price: 59 , weight: 1 , description: 'blaaa blaaa',label:"top_rated", stock: 4 }),
+        db.products.create({id: 5,seller_id:2 ,name: 'Shoes Addidas', price: 109 , weight: 1 , description: 'blaaa blaaa',label:"new_arrival", stock: 4 }),
+        db.products.create({id: 9,seller_id:2 ,name: 'Shoes Puma', price: 109 , weight: 1 , description: 'blaaa blaaa',label:"new_arrival", stock: 4 }),
+        db.products.create({id: 10,seller_id:2 ,name: 'Shoes Nike', price: 109 , weight: 1 , description: 'blaaa blaaa',label:"new_arrival", stock: 4 }),
+        db.products.create({id: 6,seller_id:2 ,name: 'Gucci glasses', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 }),
+        db.products.create({id: 7,seller_id:2 ,name: 'Apple Ipad', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 }),
+        db.products.create({id: 8,seller_id:2 ,name: 'Rolex watch', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 })
     ];
     const ordersPromiseList = [
         db.orders.create({id: 1,customer_id:1,ammount:59,shipping_address: 'Titova 99',order_address: 'Bakije sokak 33', order_email: "Hhamo@gmail.com",order_date: "28.04.2020",  order_status: 'ordered' , payment_method:'handover'}),
