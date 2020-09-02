@@ -42,10 +42,21 @@ function dataInit() {
     ];
     
     const categoriesPromiseListe = [
-        db.categories.create({id:1 , name: 'male' , description: 'blaa'}),
-        db.categories.create({id:2 , name: 'fimale' , description: 'blaa'}),
-        db.categories.create({id:3 , name: 'clothe' , description: 'blaa'}),
-        db.categories.create({id:4 , name: 'tech' , description: 'blaa'})
+        db.categories.create({id:1 , name: 'Male' , description: 'blaa'}),
+        db.categories.create({id:2 , name: 'Female' , description: 'blaa'}),
+        db.categories.create({id:3 , name: 'Fashion' , description: 'blaa'}),
+        db.categories.create({id:4 , name: 'Accesories' , description: 'blaa'}),
+        db.categories.create({id:5 , name: 'Jewlery' , description: 'blaa'}),
+        db.categories.create({id:6 , name: 'Shoes' , description: 'blaa'}),
+        db.categories.create({id:7 , name: 'Sportware' , description: 'blaa'}),
+        db.categories.create({id:8 , name: 'Home' , description: 'blaa'}),
+        db.categories.create({id:9 , name: 'Electronics' , description: 'blaa'}),
+        db.categories.create({id:10 , name: 'Mobile' , description: 'blaa'}),
+        db.categories.create({id:11 , name: 'Computer' , description: 'blaa'}),
+        db.categories.create({id:12 , name: 'Laptop' , description: 'blaa'}),
+        db.categories.create({id:13 , name: 'Watches' , description: 'blaa'}),
+        db.categories.create({id:14 , name: 'Toys' , description: 'blaa'}),
+        db.categories.create({id:15 , name: 'Books' , description: 'blaa'}),
     ];
     
     const order_detailsPromiseList = [
