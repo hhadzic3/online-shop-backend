@@ -1,5 +1,6 @@
+require('dotenv').config();
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('postgres://xuvncdsf:5tB-jsNR5ko5TI4l0OKuRFuodEMAtmQE@rogue.db.elephantsql.com:5432/xuvncdsf') 
+const sequelize = new Sequelize(`${process.env.DB_URL}`) 
 const path = require('path');
 
 const db = {};

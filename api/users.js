@@ -2,14 +2,28 @@ var express = require('express');
 var router = express.Router();
 const db = require('../db/db');
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt'); // pass ne smije biti NUL
+const bcrypt = require('bcrypt'); // password can't be NULL
+require('dotenv').config()
 
 // GET
-router.get('/', (req, res) => db.users.findAll({attributes: {exclude: ['password']}}).then(users => res.json(users)));
+router.get('/', (req, res) => {
+    db.users.findAll({
+        attributes: {
+            exclude: ['password']
+        }
+    }).then(users => res.json(users))
+});
 
-router.get('/:id', (req, res) => db.users.findOne({
-    where: {   id: req.params.id } , attributes: {exclude: ['password']}}).then( data => { res.send(data) })   
-);
+router.get('/:id', (req, res) => {
+    db.users.findOne({
+        where: { 
+            id: req.params.id 
+        } , attributes: {
+            exclude: ['password']
+        }}).then( data => {
+            res.send(data
+        )})   
+});
 
 // DELETE
 router.delete('/:id' , (req, res) => db.users.destroy({
@@ -19,7 +33,7 @@ router.delete('/:id' , (req, res) => db.users.destroy({
 
 
 router.get('/profile', (req, res) => {
-    var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+    var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY);
     
     db.users.findOne({
         where: {
@@ -33,7 +47,7 @@ router.get('/profile', (req, res) => {
         }
         })
         .catch(err => {
-        res.send('error: ' + err)
+            res.send('error: ' + err)
         })
 });
 
@@ -46,7 +60,7 @@ router.post('/login', (req, res) => {
         }
     })
     .then(user => {
-    if (bcrypt.compareSync(req.body.password,user.password) || req.body.password == user.password ) {
+    if (bcrypt.compareSync(req.body.password, user.password) || req.body.password === user.password ) {
         let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, { expiresIn: 1440 })
         res.json({ token: token })
     } else {
@@ -61,31 +75,33 @@ router.post('/login', (req, res) => {
 router.post('/register', (req, res) => {
     
     var userData = req.body;
-    // FIXME: formating
+    
     db.users.findOne({
         where: {
             email: req.body.email
         }
     }).then(user => {
+
         if (!user) {
             const hash = bcrypt.hashSync(userData.password , 10)
             userData.password = hash;
+
             db.users.create(userData)
             .then(user => {
                 let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-                expiresIn: 1440
+                    expiresIn: 1440
                 })
                 res.json({ token: token })
             })
             .catch(err => {
                 res.send('error: ' + err)
             })
-    } else {
-        res.json({ error: 'User already exists' })
-    }
-    })
-    .catch(err => {
-        res.send('error: ' + err)
+        } 
+    
+        else res.json({ error: 'User already exists' })
+        
+    }).catch(err => {
+            res.send('error: ' + err)
     })
 });
 

@@ -41,7 +41,7 @@ router.post('/' , function(req, res)  {
 // PUT
 router.put('/:id' , function(req, res)  {
     
-    if (req.params.id != undefined){
+    if (req.params.id !== undefined){
         if ( !req.body.stock )
             res.json({ error: 'Bad Data' })
         
