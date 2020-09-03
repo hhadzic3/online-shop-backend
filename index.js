@@ -14,12 +14,14 @@ const port = process.env.PORT;
 
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 
 var cors = require('cors')
 
-app.use(cors()) 
+app.use(cors())
 app.use('/api/users', users);
 app.use('/api/categories', categories);
 app.use('/api/orders', orders);
@@ -34,7 +36,7 @@ app.get('/api', function (req, res) {
     res.send("<h1>Welcome to the server side!</h1>");
 });
 
-module.exports = app.listen( port || 8080, () => {
+module.exports = app.listen(port || 8080, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 
     // Uncomment if you want to restart DB with default data
