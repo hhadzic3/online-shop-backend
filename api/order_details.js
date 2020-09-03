@@ -7,20 +7,29 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => db.order_details.findOne({
-    where: {   id: req.params.id }}).then( data => { res.send(data) })   
+        where: { id: req.params.id }
+    }).then( data => {
+        res.send(data)
+    })   
 );
 
 // DELETE
-router.delete('/:id' , (req, res) => db.order_details.destroy({
-    where: {   id: req.params.id     }
- }).then( () => { res.json({ status : 'Deleted!'}) })  
+router.delete('/:id' , (req, res) => 
+    db.order_details.destroy({
+        where: {   id: req.params.id     }
+    }).then( () => {
+        res.json({ status : 'Deleted!'})
+    })  
 );
 
 // POST
 router.post('/' , function(req, res)  {
     if ( !req.body.price)
         res.json({ error: 'Error: Price is required'})
-    db.order_details.create(req.body).then( data => { res.send(data) })
+
+    db.order_details.create(req.body).then( data => {
+        res.send(data)
+    })
     .catch( err => {
         console.log(err); 
         res.send(err)
