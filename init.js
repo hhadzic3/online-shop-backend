@@ -42,15 +42,15 @@ function dataInit() {
     ];
     
     const categoriesPromiseListe = [
-        db.categories.create({id:1 , name: 'Male' , description: 'blaa'}),
-        db.categories.create({id:2 , name: 'Female' , description: 'blaa'}),
-        db.categories.create({id:3 , name: 'Fashion' , description: 'blaa'}),
-        db.categories.create({id:4 , name: 'Accesories' , description: 'blaa'}),
+        db.categories.create({id:1 , name: 'Male' , description: 'primary'}),
+        db.categories.create({id:2 , name: 'Female' , description: 'primary'}),
+        db.categories.create({id:3 , name: 'Fashion' , description: 'primary'}),
+        db.categories.create({id:4 , name: 'Accesories' , description: 'primary'}),
         db.categories.create({id:5 , name: 'Jewlery' , description: 'blaa'}),
-        db.categories.create({id:6 , name: 'Shoes' , description: 'blaa'}),
+        db.categories.create({id:6 , name: 'Shoes' , description: 'primary'}),
         db.categories.create({id:7 , name: 'Sportware' , description: 'blaa'}),
-        db.categories.create({id:8 , name: 'Home' , description: 'blaa'}),
-        db.categories.create({id:9 , name: 'Electronics' , description: 'blaa'}),
+        db.categories.create({id:8 , name: 'Home' , description: 'primary'}),
+        db.categories.create({id:9 , name: 'Electronics' , description: 'primary'}),
         db.categories.create({id:10 , name: 'Mobile' , description: 'blaa'}),
         db.categories.create({id:11 , name: 'Computer' , description: 'blaa'}),
         db.categories.create({id:12 , name: 'Laptop' , description: 'blaa'}),
