@@ -10,9 +10,11 @@ function initialize() {
 
 function dataInit() {
     const usersPromiseList = [
-        db.users.create({id: 1, email: "Hhamo@gmail.com",password: "Hhamo",full_name: "Hamo Hamic", billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'}),
-        db.users.create({id: 2, email: "ahsdasd@gmail.com",password: "sdhfsdfs",full_name: "Hamo Hamic",
-        billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'})
+        db.users.create({id: 1, email: "hamo@gmail.com",password: "hamo",full_name: "Hamo Hamic", billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'}),
+        db.users.create({id: 2, email: "memo@gmail.com",password: "memo",full_name: "Memo memic",
+        billing_address: 'Hasana suceske 22', shipping_address: 'Hasana Suceske 22' , country: 'BiH' , phone: '033-456-123'}),
+        db.users.create({id: 3, email: "omar@gmail.com",password: "omar",full_name: "Omar Hodzic",
+        billing_address: 'Hasana suceske 11', shipping_address: 'Hasana Suceske 11' , country: 'BiH' , phone: '061-456-999'})
     ];
     const productsPromiseList = [
         db.products.create({id: 1,seller_id:1 ,name: 'Shirt NIKE', price: 49 , weight: 1 , description: 'blaaa blaaa',label:"classic" , stock: 4}),
@@ -28,7 +30,8 @@ function dataInit() {
         db.products.create({id: 10,seller_id:2 ,name: 'Shoes Nike', price: 109 , weight: 1 , description: 'blaaa blaaa',label:"new_arrival", stock: 4 }),
         db.products.create({id: 6,seller_id:2 ,name: 'Gucci glasses', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 }),
         db.products.create({id: 7,seller_id:2 ,name: 'Apple Ipad', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 }),
-        db.products.create({id: 8,seller_id:2 ,name: 'Rolex watch', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 })
+        db.products.create({id: 8,seller_id:2 ,name: 'Rolex watch', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 }),
+        db.products.create({id: 15,seller_id:2 ,name: 'Ring Pandora', price: 300 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 })
     ];
     const ordersPromiseList = [
         db.orders.create({id: 1,customer_id:1,ammount:59,shipping_address: 'Titova 99',order_address: 'Bakije sokak 33', order_email: "Hhamo@gmail.com",order_date: "28.04.2020",  order_status: 'ordered' , payment_method:'handover'}),
@@ -46,17 +49,17 @@ function dataInit() {
         db.categories.create({id:2 , name: 'Female' , description: 'primary'}),
         db.categories.create({id:3 , name: 'Fashion' , description: 'primary'}),
         db.categories.create({id:4 , name: 'Accesories' , description: 'primary'}),
-        db.categories.create({id:5 , name: 'Jewlery' , description: 'blaa'}),
+        db.categories.create({id:5 , name: 'Jewlery' , description: 'subcategory'}),
         db.categories.create({id:6 , name: 'Shoes' , description: 'primary'}),
-        db.categories.create({id:7 , name: 'Sportware' , description: 'blaa'}),
+        db.categories.create({id:7 , name: 'Sportware' , description: 'subcategory'}),
         db.categories.create({id:8 , name: 'Home' , description: 'primary'}),
         db.categories.create({id:9 , name: 'Electronics' , description: 'primary'}),
-        db.categories.create({id:10 , name: 'Mobile' , description: 'blaa'}),
-        db.categories.create({id:11 , name: 'Computer' , description: 'blaa'}),
-        db.categories.create({id:12 , name: 'Laptop' , description: 'blaa'}),
-        db.categories.create({id:13 , name: 'Watches' , description: 'blaa'}),
-        db.categories.create({id:14 , name: 'Toys' , description: 'blaa'}),
-        db.categories.create({id:15 , name: 'Books' , description: 'blaa'}),
+        db.categories.create({id:10 , name: 'Mobile' , description: 'subcategory'}),
+        db.categories.create({id:11 , name: 'Computer' , description: 'subcategory'}),
+        db.categories.create({id:12 , name: 'Laptop' , description: 'subcategory'}),
+        db.categories.create({id:13 , name: 'Watches' , description: 'subcategory'}),
+        db.categories.create({id:14 , name: 'Toys' , description: 'subcategory'}),
+        db.categories.create({id:15 , name: 'Books' , description: 'subcategory'}),
     ];
     
     const order_detailsPromiseList = [
