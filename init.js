@@ -39,9 +39,8 @@ function dataInit() {
     ];
     
     const product_imagesPromiseList = [
-        db.product_images.create({id: 1,product_id:1,image:'/images/1.png'}),
-        db.product_images.create({id: 2,product_id:1,image:'/images/1.png'}),
-        db.product_images.create({id: 3,product_id:1,image:'/images/1.png'})
+        db.product_images.create({id: 1,product_id:1,image:'/images/bag.png'}),
+        db.product_images.create({id: 2,product_id:2,image:'/images/iphone11.png'})
     ];
     
     const categoriesPromiseListe = [

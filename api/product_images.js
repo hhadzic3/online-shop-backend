@@ -9,11 +9,17 @@ router.get('/', (req, res) =>
         )
 );
 
-router.get('/:id', (req, res) => db.product_images.findOne({
-    where: { id: req.params.id }})
+router.get('/:product_id', (req, res) => db.product_images.findOne({
+    where: { id: req.params.product_id }})
         .then( data => {
-            res.send(data) 
-        })   
+            //res.send(data.image) 
+            res.sendFile(__dirname + data.image)
+            //res.sendFile( + '../images/bag.png')
+        })
+        .catch (err => {
+            res.sendFile(__dirname + '/images/iphone11.png');
+        })
+        
 );
 
 // DELETE
