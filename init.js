@@ -39,8 +39,21 @@ function dataInit() {
     ];
     
     const product_imagesPromiseList = [
-        db.product_images.create({id: 1,product_id:1,image:'/images/bag.png'}),
-        db.product_images.create({id: 2,product_id:2,image:'/images/iphone11.png'})
+        db.product_images.create({id: 1,product_id:1,image:'/images/t-shirtNike.jpeg'}),
+        db.product_images.create({id: 2,product_id:2,image:'/images/iphone11.png'}),
+        db.product_images.create({id: 3,product_id:2,image:'/images/mba.jpg'}),
+        db.product_images.create({id: 4,product_id:2,image:'/images/t-shirtNike.jpeg'}),
+        db.product_images.create({id: 5,product_id:2,image:'/images/t-shirtNike.jpeg'}),
+        db.product_images.create({id: 6,product_id:2,image:'/images/t-shirtNike.jpeg'}),
+        db.product_images.create({id: 7,product_id:2,image:'/images/t-shirtNike.jpeg'}),
+        db.product_images.create({id: 8,product_id:2,image:'/images/rolexGold.jpg'}),
+        db.product_images.create({id: 9,product_id:2,image:'/images/bag.png'}),
+        db.product_images.create({id: 10,product_id:2,image:'/images/gucciBelt.jpg'}),
+        db.product_images.create({id: 11,product_id:2,image:'/images/iphone11.png'}),
+        db.product_images.create({id: 12,product_id:2,image:'/images/iphone11.png'}),
+        db.product_images.create({id: 13,product_id:2,image:'/images/mba.jpg'}),
+        db.product_images.create({id: 14,product_id:2,image:'/images/mba.jpg'}),
+        db.product_images.create({id: 15,product_id:2,image:'/images/rolexGreen.jpg'})
     ];
     
     const categoriesPromiseListe = [
