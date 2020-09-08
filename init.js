@@ -31,7 +31,7 @@ function dataInit() {
         db.products.create({id: 6,seller_id:2 ,name: 'Gucci glasses', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 }),
         db.products.create({id: 7,seller_id:2 ,name: 'Apple Ipad', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 }),
         db.products.create({id: 8,seller_id:2 ,name: 'Rolex watch', price: 400 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 }),
-        db.products.create({id: 15,seller_id:2 ,name: 'Ring Pandora', price: 300 , weight: 1 , description: 'blaaa blaaa',label:"feature", stock: 4 })
+        db.products.create({id: 15,seller_id:2 ,name: 'Ring Pandora', price: 300 , weight: 1 , description: 'blaaa blaaa',label:"classic", stock: 4 })
     ];
     const ordersPromiseList = [
         db.orders.create({id: 1,customer_id:1,ammount:59,shipping_address: 'Titova 99',order_address: 'Bakije sokak 33', order_email: "Hhamo@gmail.com",order_date: "28.04.2020",  order_status: 'ordered' , payment_method:'handover'}),
