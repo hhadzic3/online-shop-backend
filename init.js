@@ -72,6 +72,16 @@ function dataInit() {
         db.categories.create({id:13 , name: 'Watches' , description: 'subcategory'}),
         db.categories.create({id:14 , name: 'Toys' , description: 'subcategory'}),
         db.categories.create({id:15 , name: 'Books' , description: 'subcategory'}),
+        db.categories.create({id:16 , name: 'White' , description: 'color'}),
+        db.categories.create({id:17 , name: 'Black' , description: 'color'}),
+        db.categories.create({id:18 , name: 'Green' , description: 'color'}),
+        db.categories.create({id:19 , name: 'Blue' , description: 'color'}),
+        db.categories.create({id:21 , name: 'Red' , description: 'color'}),
+        db.categories.create({id:22 , name: 'Orange' , description: 'color'}),
+        db.categories.create({id:23 , name: 'Small' , description: 'size'}),
+        db.categories.create({id:24 , name: 'Medium' , description: 'size'}),
+        db.categories.create({id:25 , name: 'Large' , description: 'size'}),
+        db.categories.create({id:26 , name: 'Extra Large' , description: 'size'})
     ];
     
     const order_detailsPromiseList = [

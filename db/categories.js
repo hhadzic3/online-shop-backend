@@ -10,7 +10,10 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
         name: DataTypes.STRING,
-        description: DataTypes.STRING
+        description: {
+            type: Sequelize.STRING,
+            validate:{ isIn: [["primary","subcategory","color","price","size"]] }    
+        },
     }, {
         sequelize,
         tableName: 'categories',
