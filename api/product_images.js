@@ -12,12 +12,10 @@ router.get('/', (req, res) =>
 router.get('/:product_id', (req, res) => db.product_images.findOne({
     where: { id: req.params.product_id }})
         .then( data => {
-            //res.send(data.image) 
             res.sendFile(__dirname + data.image)
-            //res.sendFile( + '../images/bag.png')
         })
         .catch (err => {
-            res.sendFile(__dirname + '/images/iphone11.png');
+            console.log('Error: ' + err);
         })
         
 );
