@@ -5,10 +5,45 @@ const db = require('../db/db');
 // GET sa query
 router.get('/', (req, res) => { 
     let l = req.query.label;
+    let sort = req.query.sortby;
+    let order;
+
+    if (sort === undefined){
+        sort = 'price';
+        order = 'ASC'
+    }
+    else if (sort === 'price_asc'){
+        sort = 'price';
+        order = 'ASC'
+    }        
+    else if (sort === 'price_desc'){
+        sort = 'price';
+        order = 'DESC'
+    }        
+    else if (sort === 'popularity'){
+        sort = 'stock';
+        order = 'ASC'
+    }        
+    else if (sort === 'rating'){
+        sort = 'stock';
+        order = 'asc'
+    }        
+    else if (sort === 'newness'){
+        sort = 'stock';
+        order = 'asc'
+    }        
+    else {
+        sort = 'price';
+        order = 'ASC'
+    }
+
     if (l != undefined){
-        db.products.findAll({
-            where: {label:l}
-        }).then(products => res.json(products))
+        db.products.findAll(
+            {
+                where: {label:l},
+                order: [[sort, order]]
+            },
+        ).then(products => res.json(products))
     }
     else {
         db.products.findAll().then(products => res.json(products))

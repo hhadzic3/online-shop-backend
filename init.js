@@ -89,7 +89,10 @@ function dataInit() {
         db.order_details.create({id: 2, order_id:1 , product_id: 1 , price: 59 , quantity: 5 })
     ];
     const product_categoriesPromiseList = [
-        db.product_categories.create({id: 1,product_id:1,category_id:1})
+        db.product_categories.create({id: 1,product_id:1,category_id:1}),
+        db.product_categories.create({id: 2,product_id:1,category_id:3}),
+        db.product_categories.create({id: 3,product_id:1,category_id:7}),
+        db.product_categories.create({id: 4,product_id:1,category_id:25}),
     ];
     
     return new Promise((resolve, reject) => {
