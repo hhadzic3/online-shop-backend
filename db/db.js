@@ -18,7 +18,7 @@ db.products = sequelize.import(path.join(__dirname , '/products.js'));
 db.orders = sequelize.import(path.join(__dirname , '/orders.js'));
 db.order_details = sequelize.import(path.join(__dirname , '/order_details.js'));
 db.categories = sequelize.import(path.join(__dirname , '/categories.js'));
-db.product_categories = sequelize.import(path.join(__dirname , '/product_categories.js'));
+//db.product_categories = sequelize.import(path.join(__dirname , '/product_categories.js'));
 db.product_images = sequelize.import(path.join(__dirname , '/product_images.js'));
 
 
@@ -86,7 +86,7 @@ db.orders.belongsTo(db.users, {
         name: 'customer_id'
     }
 });
-
+/*
 // 6) Asociation -> todo: obratiti paznju na ovu vezu   
 db.products.hasMany(db.product_categories, {
     foreignKey: {
@@ -112,5 +112,25 @@ db.product_categories.belongsTo(db.categories, {
         name: 'category_id'
     }
 });
+*/
+
+db.product_categories = sequelize.define('product_categories', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        unique: true,
+        allowNull: false,
+        autoIncrement: true
+    }
+}, {
+    sequelize,
+    tableName: 'product_categories',
+    timestamps: false,
+    underscored: true
+});
+ 
+
+db.products.belongsToMany(db.categories, { through: db.product_categories });
+db.categories.belongsToMany(db.products, { through: db.product_categories });
 
 module.exports = db;

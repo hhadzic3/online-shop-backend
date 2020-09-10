@@ -4,15 +4,11 @@ const db = require('../db/db');
 
 // TODO: REFACTOR -> GET with query
 router.get('/', (req, res) => { 
-    let l = req.query.label;
+    let label = req.query.label;
     let sort = req.query.sortby;
     let order;
 
-    if (sort === undefined){
-        sort = 'price';
-        order = 'DESC'
-    }
-    else if (sort === 'price_asc'){
+    if (sort === 'price_asc'){
         sort = 'price';
         order = 'ASC'
     }        
@@ -27,31 +23,33 @@ router.get('/', (req, res) => {
     else if (sort === 'newness'){
         sort = 'newness';
         order = ''
-    }        
-    else {
-        sort = 'price';
-        order = 'ASC'
-    }
+    }     
 
-    if (l !== undefined && sort === 'price'){
+    if (label === undefined && sort === undefined){
+        db.products.findAll({
+            include: db.categories
+        }
+        ).then(products => res.json(products))
+    }
+    else if (label !== undefined && sort === 'price'){
         db.products.findAll(
             {
-                where: {label:l},
+                where: {label:label},
                 order: [[sort, order]]
             },
         ).then(products => res.json(products))
     }
-    else if (l === undefined && sort === 'price') {
+    else if (label === undefined && sort === 'price') {
         db.products.findAll({
             order: [[sort, order]]
         }).then(products => res.json(products))
     }   
-    else if (l === undefined && sort !== 'price' && sort === 'newness') {
+    else if (label === undefined && sort !== 'price' && sort === 'newness') {
         db.products.findAll({
             where: {label:'new_arrival'}
         }).then(products => res.json(products))
     }   
-    else if (l === undefined && sort !== 'price' && sort === 'popularity') {
+    else if (label === undefined && sort !== 'price' && sort === 'popularity') {
         db.products.findAll({
             where: { 
                 label:['new_arrival','top_rated','last_chance','feture' ] 
