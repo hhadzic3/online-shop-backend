@@ -2,10 +2,14 @@ var express = require('express');
 var router = express.Router();
 const db = require('../db/db');
 
+
 // TODO: REFACTOR -> GET with query
 router.get('/', (req, res) => { 
     let label = req.query.label;
     let sort = req.query.sortby;
+    let category = req.query.category;
+    let limit = req.query.limit;
+    
     let order;
 
     if (sort === 'price_asc'){
@@ -17,44 +21,40 @@ router.get('/', (req, res) => {
         order = 'DESC'
     }        
     else if (sort === 'popularity'){
-        sort = 'popularity';
-        order = ''
-    }               
-    else if (sort === 'newness'){
-        sort = 'newness';
-        order = ''
-    }     
-
-    if (label === undefined && sort === undefined){
+        sort = 'label';
+        order = 'DESC'
+    }    
+    
+    if (label == undefined && sort == undefined){
         db.products.findAll({
+            limit: limit,
             include: db.categories
         }
         ).then(products => res.json(products))
     }
     else if (label !== undefined && sort === 'price'){
         db.products.findAll(
-            {
+            {limit: limit,
                 where: {label:label},
                 order: [[sort, order]]
             },
-        ).then(products => res.json(products))
+            ).then(products => res.json(products))
     }
-    else if (label === undefined && sort === 'price') {
-        db.products.findAll({
-            order: [[sort, order]]
-        }).then(products => res.json(products))
-    }   
-    else if (label === undefined && sort !== 'price' && sort === 'newness') {
-        db.products.findAll({
-            where: {label:'new_arrival'}
-        }).then(products => res.json(products))
-    }   
-    else if (label === undefined && sort !== 'price' && sort === 'popularity') {
-        db.products.findAll({
-            where: { 
-                label:['new_arrival','top_rated','last_chance','feture' ] 
-            }
-        }).then(products => res.json(products))
+    else {
+        if (label === undefined){
+            db.products.findAll({
+                limit: limit,
+                where: {},
+                order: [[sort, order]]
+            }).then(products => res.json(products))
+        }
+        else {
+            db.products.findAll({
+                limit: limit,
+                where: {label:label},
+                order: [[sort, order]]
+            }).then(products => res.json(products))
+        }
     }   
 });
 
