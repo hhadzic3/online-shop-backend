@@ -46,7 +46,9 @@ router.get('/', (req, res) => {
         ).then(products => res.json(products))
     }
     else {
-        db.products.findAll().then(products => res.json(products))
+        db.products.findAll({
+            order: [[sort, order]]
+        }).then(products => res.json(products))
     }   
 });
 
