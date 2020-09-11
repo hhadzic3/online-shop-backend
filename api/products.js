@@ -25,16 +25,22 @@ router.get('/', (req, res) => {
         order = 'DESC'
     }    
     
-    if (label == undefined && sort == undefined){
+    if (label == undefined && sort == undefined && limit == undefined){
+        db.products.findAll({
+            include: db.categories
+        }).then(products => res.json(products))
+    }
+    else if (label == undefined && sort == undefined && limit != undefined){
         db.products.findAll({
             limit: limit,
             include: db.categories
-        }
-        ).then(products => res.json(products))
+        }).then(products => res.json(products))
     }
+
     else if (label !== undefined && sort === 'price'){
         db.products.findAll(
-            {limit: limit,
+            {   
+                limit: limit,
                 where: {label:label},
                 order: [[sort, order]]
             },
@@ -50,9 +56,8 @@ router.get('/', (req, res) => {
         }
         else {
             db.products.findAll({
-                limit: limit,
                 where: {label:label},
-                order: [[sort, order]]
+                //order: [[sort, order]]
             }).then(products => res.json(products))
         }
     }   
