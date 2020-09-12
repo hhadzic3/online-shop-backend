@@ -2,16 +2,24 @@ var express = require('express');
 var router = express.Router();
 const db = require('../db/db');
 
+function filterByCategory(req){
+    let category = req.query.category;
+    let subCategory = req.query.sub_category;
+
+    if (category === undefined || category === 'none')
+        return 0;
+    else if (subCategory === 'none' )
+        return 1;
+    else if (subCategory !== 'none' )
+        return 2;
+}
 
 // TODO: REFACTOR -> GET with query
 router.get('/', (req, res) => { 
-    let label = req.query.label;
-    let sort = req.query.sortby;
-    let category = req.query.category;
-    let limit = req.query.limit;
-    
-    let order;
+    let sort = 'popularity';
+    let order = 'DESC';
 
+    sort = req.query.label;
     if (sort === 'price_asc'){
         sort = 'price';
         order = 'ASC'
@@ -20,24 +28,30 @@ router.get('/', (req, res) => {
         sort = 'price';
         order = 'DESC'
     }        
-    else if (sort === 'popularity'){
+    else{
         sort = 'label';
         order = 'DESC'
-    }    
+    } 
+
+
+    let label = req.query.label;
+    let limit = req.query.limit;
+    if (limit === undefined)
+        limit = 9;
+
+    let category = req.query.category;
+    let subCategory = req.query.sub_category;
+    //let color = req.query.color;
+    //let size = req.query.size;
     
-    if (label == undefined && sort == undefined && limit == undefined){
-        db.products.findAll({
-            include: db.categories
-        }).then(products => res.json(products))
-    }
-    else if (label == undefined && sort == undefined && limit != undefined){
+    
+    if (label === undefined && sort === undefined){
         db.products.findAll({
             limit: limit,
             include: db.categories
         }).then(products => res.json(products))
     }
-
-    else if (label !== undefined && sort === 'price'){
+    else if (label !== undefined && sort !== undefined){
         db.products.findAll(
             {   
                 limit: limit,
@@ -48,19 +62,36 @@ router.get('/', (req, res) => {
     }
     else {
         if (label === undefined){
-            db.products.findAll({
-                limit: limit,
-                where: {},
-                order: [[sort, order]]
-            }).then(products => res.json(products))
+            let filter = filterByCategory(req);
+            if (filter === 2){
+                db.products.findAll({
+                    limit: limit,
+                    order: [[sort, order]],
+                    
+                    include: [{
+                        model: db.categories, 
+                        attributes: [ 'name'], 
+                         where: { name: [category,subCategory] } 
+                    }]
+                    
+                }).then(products => res.json(products))
+            }
+            else {
+                db.products.findAll({
+                    limit: limit,
+                    order: [[sort, order]]
+                }).then(products => res.json(products))
+            }
         }
         else {
             db.products.findAll({
-                where: {label:label},
-                //order: [[sort, order]]
+                limit: limit,
+                where: {label:label}
             }).then(products => res.json(products))
         }
     }   
+
+
 });
 
 

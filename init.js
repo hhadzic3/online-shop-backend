@@ -61,18 +61,17 @@ function dataInit() {
         db.categories.create({id:2 , name: 'Female' , description: 'primary'}),
         db.categories.create({id:3 , name: 'Fashion' , description: 'primary'}),
         db.categories.create({id:4 , name: 'Accesories' , description: 'primary'}),
-        db.categories.create({id:5 , name: 'Jewlery' , description: 'subcategory'}),
-        db.categories.create({id:6 , name: 'Shoes' , description: 'primary'}),
-        db.categories.create({id:7 , name: 'Sportware' , description: 'subcategory'}),
-        db.categories.create({id:8 , name: 'Home' , description: 'primary'}),
-        db.categories.create({id:9 , name: 'Electronics' , description: 'primary'}),
-        db.categories.create({id:10 , name: 'Mobile' , description: 'subcategory'}),
-        db.categories.create({id:11 , name: 'Computer' , description: 'subcategory'}),
-        db.categories.create({id:12 , name: 'Laptop' , description: 'subcategory'}),
-        db.categories.create({id:13 , name: 'Watches' , description: 'subcategory'}),
-        db.categories.create({id:14 , name: 'Toys' , description: 'subcategory'}),
-        db.categories.create({id:15 , name: 'Books' , description: 'subcategory'}),
-        db.categories.create({id:16 , name: 'White' , description: 'color'}),
+        db.categories.create({id:5 , name: 'Home' , description: 'primary'}),
+        db.categories.create({id:6 , name: 'Electronics' , description: 'primary'}),
+        db.categories.create({id:7 , name: 'Shoes' , description: 'subcategory'}),
+        db.categories.create({id:8 , name: 'Sportware' , description: 'subcategory'}),
+        db.categories.create({id:9 , name: 'Clothes' , description: 'subcategory'}),
+        db.categories.create({id:10 , name: 'Jewlery' , description: 'subcategory'}),
+        db.categories.create({id:11 , name: 'Watches' , description: 'subcategory'}),
+        db.categories.create({id:12 , name: 'Mobile' , description: 'subcategory'}),
+        db.categories.create({id:13 , name: 'Computer' , description: 'subcategory'}),
+        db.categories.create({id:14 , name: 'Laptop' , description: 'subcategory'}),
+        /*db.categories.create({id:16 , name: 'White' , description: 'color'}),
         db.categories.create({id:17 , name: 'Black' , description: 'color'}),
         db.categories.create({id:18 , name: 'Green' , description: 'color'}),
         db.categories.create({id:19 , name: 'Blue' , description: 'color'}),
@@ -81,7 +80,7 @@ function dataInit() {
         db.categories.create({id:23 , name: 'Small' , description: 'size'}),
         db.categories.create({id:24 , name: 'Medium' , description: 'size'}),
         db.categories.create({id:25 , name: 'Large' , description: 'size'}),
-        db.categories.create({id:26 , name: 'Extra Large' , description: 'size'})
+        db.categories.create({id:26 , name: 'Extra Large' , description: 'size'})*/
     ];
     
     const order_detailsPromiseList = [
@@ -89,10 +88,18 @@ function dataInit() {
         db.order_details.create({id: 2, order_id:1 , product_id: 1 , price: 59 , quantity: 5 })
     ];
     const product_categoriesPromiseList = [
-        db.product_categories.create({id:1,productId:1,categoryId:1}),
+        db.product_categories.create({id: 1,productId:1,categoryId:1}),
         db.product_categories.create({id: 2,productId:1,categoryId:3}),
-        db.product_categories.create({id: 3,productId:1,categoryId:7}),
-        db.product_categories.create({id: 4,productId:1,categoryId:25})
+        db.product_categories.create({id: 3,productId:1,categoryId:3}),
+        db.product_categories.create({id: 4,productId:1,categoryId:3}),
+        db.product_categories.create({id: 5,productId:1,categoryId:3}),
+        db.product_categories.create({id: 6,productId:1,categoryId:3}),
+        db.product_categories.create({id: 7,productId:1,categoryId:3}),
+        db.product_categories.create({id: 8,productId:1,categoryId:3}),
+        db.product_categories.create({id: 9,productId:1,categoryId:3}),
+        db.product_categories.create({id: 10,productId:1,categoryId:3}),
+        db.product_categories.create({id: 11,productId:1,categoryId:3}),
+        db.product_categories.create({id: 12,productId:1,categoryId:3})
     ];
     
     return new Promise((resolve, reject) => {
