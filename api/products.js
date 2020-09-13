@@ -16,10 +16,8 @@ function filterByCategory(req){
 
 // TODO: REFACTOR -> GET with query
 router.get('/', (req, res) => { 
-    let sort = 'popularity';
-    let order = 'DESC';
-
-    sort = req.query.label;
+    let order;
+    let sort = req.query.label;
     if (sort === 'price_asc'){
         sort = 'price';
         order = 'ASC'
@@ -33,7 +31,6 @@ router.get('/', (req, res) => {
         order = 'DESC'
     } 
 
-
     let label = req.query.label;
     let limit = req.query.limit;
     if (limit === undefined)
@@ -41,9 +38,6 @@ router.get('/', (req, res) => {
 
     let category = req.query.category;
     let subCategory = req.query.sub_category;
-    //let color = req.query.color;
-    //let size = req.query.size;
-    
     
     if (label === undefined && sort === undefined){
         db.products.findAll({
@@ -56,7 +50,8 @@ router.get('/', (req, res) => {
             {   
                 limit: limit,
                 where: {label:label},
-                order: [[sort, order]]
+                order: [[sort, order]],
+                include: db.categories
             },
             ).then(products => res.json(products))
     }
@@ -79,7 +74,8 @@ router.get('/', (req, res) => {
             else {
                 db.products.findAll({
                     limit: limit,
-                    order: [[sort, order]]
+                    order: [[sort, order]],
+                    include: db.categories
                 }).then(products => res.json(products))
             }
         }

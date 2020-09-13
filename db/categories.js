@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
         name: DataTypes.STRING,
         description: {
             type: Sequelize.STRING,
-            validate:{ isIn: [["primary","subcategory","color","price","size"]] }    
+            //validate:{ isIn: [["primary","subcategory","color","price","size"]] }    
         },
     }, {
         sequelize,
