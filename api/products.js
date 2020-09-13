@@ -18,8 +18,8 @@ function filterByCategory(req){
 
 // TODO: REFACTOR -> GET with query
 router.get('/', (req, res) => { 
-    let order;
-    let sort = req.query.label;
+    let order = 'ASC';
+    let sort = req.query.sortby;
     if (sort === 'price_asc'){
         sort = 'price';
         order = 'ASC'
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
         sort = 'price';
         order = 'DESC'
     }        
-    else{
+    else if (sort === 'popularity'){
         sort = 'label';
         order = 'DESC'
     } 
@@ -52,8 +52,7 @@ router.get('/', (req, res) => {
             {   
                 limit: limit,
                 where: {label:label},
-                order: [[sort, order]],
-                include: db.categories
+                order: [[sort, order]]
             },
             ).then(products => res.json(products))
     }
@@ -76,8 +75,7 @@ router.get('/', (req, res) => {
             else {
                 db.products.findAll({
                     limit: limit,
-                    order: [[sort, order]],
-                    include: db.categories
+                    order: [[sort, order]]
                 }).then(products => res.json(products))
             }
         }
