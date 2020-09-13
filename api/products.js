@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../db/db');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 function filterByCategory(req){
     let category = req.query.category;
@@ -65,8 +67,8 @@ router.get('/', (req, res) => {
                     
                     include: [{
                         model: db.categories, 
-                        attributes: [ 'name'], 
-                         where: { name: [category,subCategory] } 
+                        attributes: ['name'], 
+                         where: { name: subCategory, description:{ [Op.substring]: category} } 
                     }]
                     
                 }).then(products => res.json(products))

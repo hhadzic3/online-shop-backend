@@ -84,7 +84,7 @@ function dataInit() {
     ];
     const product_categoriesPromiseList = [
         db.product_categories.create({id: 1,productId:1,categoryId:1}),
-        db.product_categories.create({id: 2,productId:1,categoryId:16}),
+        db.product_categories.create({id: 2,productId:1,categoryId:7}),
         db.product_categories.create({id: 3,productId:2,categoryId:2}),
         db.product_categories.create({id: 4,productId:2,categoryId:15}),
         db.product_categories.create({id: 5,productId:3,categoryId:5}),
