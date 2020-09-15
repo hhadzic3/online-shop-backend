@@ -43,8 +43,7 @@ router.delete('/:id', (req, res) => db.users.destroy({
 router.get('/profile', (req, res) => {
     var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY);
 
-    db.users
-        .findOne({
+    db.users.findOne({
             where: {
                 id: decoded.id
             }
@@ -57,29 +56,33 @@ router.get('/profile', (req, res) => {
             }
         })
         .catch(err => {
-            res.send('error: ' + err)
+            res.send('Error: ' + err)
         })
 });
 
 // POST
 router.post('/login', (req, res) => {
-    db.users
-        .findOne({
+    db.users.findOne({
             where: {
-                email: req.body.email,
-                password: req.body.password
+                email: req.body.email
             }
         })
         .then(user => {
-            if (bcrypt.compareSync(req.body.password, user.password) || req.body.password === user.password) {
-                let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {expiresIn: 1440})
-                res.json({token: token})
+            if (user){
+                if (bcrypt.compareSync(req.body.password, user.password) || req.body.password === user.password) {
+                    let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+                        expiresIn: 1440
+                    })
+                    res.json({token: token})
+                    // ili res.send(token)
+                }
             } else {
                 res.send('User does not exist')
             }
         })
         .catch(err => {
-            res.send('error: ' + err)
+            // res.suatus(400).json({error: err})
+            res.send('Error: ' + err)
         })
 })
 
@@ -87,10 +90,9 @@ router.post('/register', (req, res) => {
 
     var userData = req.body;
 
-    db.users
-        .findOne({
+    db.users.findOne({
             where: {
-                email: req.body.email
+                email: userData.email
             }
         })
         .then(user => {
@@ -99,22 +101,22 @@ router.post('/register', (req, res) => {
                 const hash = bcrypt.hashSync(userData.password, 10)
                 userData.password = hash;
 
-                db
-                    .users
-                    .create(userData)
+                db.users.create(userData)
                     .then(user => {
-                        let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {expiresIn: 1440})
-                        res.json({token: token})
+                        let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+                            expiresIn: 1440
+                        })
+                        res.json({ token: token })
+                        //or res.json({ status: user.email + 'Registered!' })
                     })
                     .catch(err => {
-                        res.send('error: ' + err)
+                        res.send('Error: ' + err)
                     })
-            } else 
-                res.json({error: 'User already exists'})
-
+            } 
+            else res.json({error: 'User already exists'})
         })
         .catch(err => {
-            res.send('error: ' + err)
+            res.send('Error: ' + err)
         })
 });
 
