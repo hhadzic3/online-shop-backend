@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
     if (limit === undefined)
         limit = 9;
 
-
     if (sort === 'price_asc'){
         sort = 'price';
         order = 'ASC'
@@ -36,21 +35,20 @@ router.get('/', (req, res) => {
     }
 
     db.products.findAll({
-        limit: limit,
         include: db.categories,
         order: [[sort, order]]
     }).then(products => {
-        
-        const response = products.filter(c => {
+            const response = products.filter(c => {
             return (label ? (c.label === label) : true) &&
-            (category && category !== 'none' ? (c.categories.some(element => {
-                return element['description'].includes(category)
-            })) : true) &&
-            (subCategory && subCategory !== 'none'? (c.categories.some(element => {
-                return element['name'] === subCategory
-            })) : true); 
-        });
-        res.json(response)
+                (category && category !== 'none' ? (c.categories.some(element => {
+                    return element['description'].includes(category)
+                })) : true) &&
+                (subCategory && subCategory !== 'none'? (c.categories.some(element => {
+                    return element['name'] === subCategory
+                })) : true); 
+            });
+        const response2 = response.slice(0,limit);
+        res.json(response2)
     })
 });
 

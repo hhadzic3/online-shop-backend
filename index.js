@@ -39,5 +39,5 @@ app.get('/api', function (req, res) {
 module.exports = app.listen(port || 8080, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
     // Uncomment if you want to restart DB with default data
-    db.initialize();
+    //db.initialize();
 });
