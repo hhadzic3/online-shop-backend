@@ -4,22 +4,20 @@ const db = require('../db/db');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-function filterByCategory(req){
+
+// GET with query
+router.get('/', (req, res) => { 
+    let order;
+    let sort = req.query.sortby;
+    let label = req.query.label;
+    let limit = req.query.limit;
     let category = req.query.category;
     let subCategory = req.query.sub_category;
 
-    if (category === undefined || category === 'none')
-        return 0;
-    else if (subCategory === 'none' )
-        return 1;
-    else if (subCategory !== 'none' )
-        return 2;
-}
+    if (limit === undefined)
+        limit = 9;
 
-// TODO: REFACTOR -> GET with query
-router.get('/', (req, res) => { 
-    let order = 'ASC';
-    let sort = req.query.sortby;
+
     if (sort === 'price_asc'){
         sort = 'price';
         order = 'ASC'
@@ -32,64 +30,29 @@ router.get('/', (req, res) => {
         sort = 'label';
         order = 'DESC'
     } 
-
-    let label = req.query.label;
-    let limit = req.query.limit;
-    if (limit === undefined)
-        limit = 9;
-
-    let category = req.query.category;
-    let subCategory = req.query.sub_category;
-    
-    if (label === undefined && sort === undefined){
-        db.products.findAll({
-            limit: limit,
-            include: db.categories
-        }).then(products => res.json(products))
-    }
-    else if (label !== undefined && sort !== undefined){
-        db.products.findAll(
-            {   
-                limit: limit,
-                where: {label:label},
-                order: [[sort, order]]
-            },
-            ).then(products => res.json(products))
-    }
     else {
-        if (label === undefined){
-            let filter = filterByCategory(req);
-            if (filter === 2){
-                db.products.findAll({
-                    limit: limit,
-                    order: [[sort, order]],
-                    
-                    include: [{
-                        model: db.categories, 
-                        attributes: ['name'], 
-                         where: { name: subCategory, description:{ [Op.substring]: category} } 
-                    }]
-                    
-                }).then(products => res.json(products))
-            }
-            else {
-                db.products.findAll({
-                    limit: limit,
-                    order: [[sort, order]]
-                }).then(products => res.json(products))
-            }
-        }
-        else {
-            db.products.findAll({
-                limit: limit,
-                where: {label:label}
-            }).then(products => res.json(products))
-        }
-    }   
+        sort = 'label';
+        order = 'DESC'
+    }
 
-
+    db.products.findAll({
+        limit: limit,
+        include: db.categories,
+        order: [[sort, order]]
+    }).then(products => {
+        
+        const response = products.filter(c => {
+            return (label ? (c.label === label) : true) &&
+            (category && category !== 'none' ? (c.categories.some(element => {
+                return element['description'].includes(category)
+            })) : true) &&
+            (subCategory && subCategory !== 'none'? (c.categories.some(element => {
+                return element['name'] === subCategory
+            })) : true); 
+        });
+        res.json(response)
+    })
 });
-
 
 router.get('/:id', (req, res) => db.products.findOne({
     where: {   id: req.params.id }}).then( data => { res.send(data) })   
