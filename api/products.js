@@ -31,6 +31,7 @@ router.get('/', (req, res) => {
     }
     const {sort, order} = sortby;
 
+
     db.products.findAll({
         include: db.categories,
         order: [[sort, order]]
@@ -38,11 +39,11 @@ router.get('/', (req, res) => {
             const response = products.filter(product => {
             return (label ? (product.label === label) : true) &&
                 (price && price != 'none' ? (product.price <= price) : true) &&
-                (category && category !== 'none' ? (product.categories.some(category => {
-                    return category['description'].includes(category)
+                (category && category !== 'none' ? (product.categories.some(one_category => {
+                    return one_category['description'].includes(category)
                 })) : true) &&
-                (subCategory && subCategory !== 'none'? (product.categories.some(category => {
-                    return category['name'] === subCategory
+                (subCategory && subCategory !== 'none'? (product.categories.some(one_category => {
+                    return one_category['name'] === subCategory
                 })) : true); 
             });
         res.json(response.slice(0,limit))
