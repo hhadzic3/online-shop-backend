@@ -63,18 +63,18 @@ function dataInit() {
     ];
 
     const product_categoriesPromiseList = [
-        db.product_categories.create({id: 1,productId:1,categoryId:1}),
-        db.product_categories.create({id: 19,productId:1,categoryId:2}),
-        db.product_categories.create({id: 18,productId:1,categoryId:3}),
-        db.product_categories.create({id: 2,productId:1,categoryId:7}),
-        db.product_categories.create({id: 22,productId:1,categoryId:8}),
-        db.product_categories.create({id: 23,productId:1,categoryId:9}),
-        db.product_categories.create({id: 17,productId:4,categoryId:1}),
-        db.product_categories.create({id: 15,productId:4,categoryId:2}),
-        db.product_categories.create({id: 16,productId:4,categoryId:3}),
-        db.product_categories.create({id: 24,productId:4,categoryId:7}),
-        db.product_categories.create({id: 26,productId:4,categoryId:8}),
-        db.product_categories.create({id: 27,productId:4,categoryId:9}),
+        db.product_categories.create({ productId:1,categoryId:1}),
+        db.product_categories.create({ productId:1,categoryId:2}),
+        db.product_categories.create({ productId:1,categoryId:3}),
+        db.product_categories.create({ productId:1,categoryId:7}),
+        db.product_categories.create({ productId:1,categoryId:8}),
+        db.product_categories.create({ productId:1,categoryId:9}),
+        db.product_categories.create({ productId:4,categoryId:1}),
+        db.product_categories.create({ productId:4,categoryId:2}),
+        db.product_categories.create({ productId:4,categoryId:3}),
+        db.product_categories.create({ productId:4,categoryId:7}),
+        db.product_categories.create({ productId:4,categoryId:8}),
+        db.product_categories.create({ productId:4,categoryId:9}),
 
 
         db.product_categories.create({ productId:5,categoryId:1}),

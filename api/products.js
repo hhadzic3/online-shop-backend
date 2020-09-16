@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
     let sort = req.query.sortby;
     let label = req.query.label;
     let limit = req.query.limit;
+    let price = req.query.price;
     let category = req.query.category;
     let subCategory = req.query.sub_category;
 
@@ -40,6 +41,7 @@ router.get('/', (req, res) => {
     }).then(products => {
             const response = products.filter(c => {
             return (label ? (c.label === label) : true) &&
+                (price && price != 'none' ? (c.price <= price) : true) &&
                 (category && category !== 'none' ? (c.categories.some(element => {
                     return element['description'].includes(category)
                 })) : true) &&
@@ -47,8 +49,7 @@ router.get('/', (req, res) => {
                     return element['name'] === subCategory
                 })) : true); 
             });
-        const response2 = response.slice(0,limit);
-        res.json(response2)
+        res.json(response.slice(0,limit))
     })
 });
 
