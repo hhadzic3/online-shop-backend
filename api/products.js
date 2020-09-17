@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
             sort: 'label',
             order: 'DESC'
         }
+        limit = 15;
     } else {
         sortby = {
             sort: req.query.sort,
@@ -38,13 +39,14 @@ router.get('/', (req, res) => {
         };
         
     let whereCategory = {};
-    if (category && category !== 'none' && subCategory && subCategory !== 'none')
+    if (category && category !== 'none' && subCategory && subCategory !== 'none'){
         whereCategory = {
             name: subCategory,
             description: {
                 [Op.substring]: category
             }
         }
+    }
 
     db.products.findAll({
         limit: limit,
