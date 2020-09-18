@@ -12,12 +12,10 @@ require('dotenv').config()
 const hostname = process.env.HOST;
 const port = process.env.PORT;
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 
 var cors = require('cors')
 

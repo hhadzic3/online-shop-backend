@@ -9,16 +9,43 @@ router.get('/', (req, res) =>
         )
 );
 
-router.get('/:product_id', (req, res) => db.product_images.findOne({
-    where: { id: req.params.product_id }})
+router.get('/:product_id', (req, res) => {
+
+    db.product_images.findOne({
+        where: { product_id: req.params.product_id }
+    })
+    .then( data => {
+        res.sendFile(__dirname + data.image)
+    })
+    .catch (err => {
+        console.log('Error: ' + err);
+    })    
+});
+router.get('/id/:id', (req, res) => {
+
+    db.product_images.findOne({
+        where: { id: req.params.id }
+    })
+    .then( data => {
+        res.sendFile(__dirname + data.image)
+    })
+    .catch (err => {
+        console.log('Error: ' + err);
+    })    
+});
+
+router.get('/all/:product_id', (req, res) => {
+        db.product_images.findAll({
+            where: { product_id: req.params.product_id }
+        })
         .then( data => {
-            res.sendFile(__dirname + data.image)
+            res.json(data)
+            //res.sendFile(__dirname + data.image)
         })
         .catch (err => {
             console.log('Error: ' + err);
         })
-        
-);
+});
 
 // DELETE
 router.delete('/:id' , (req, res) => 
