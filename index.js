@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
 
 var cors = require('cors')
 
-app.use(cors())
+app.use(cors()) 
 app.use('/api/users', users);
 app.use('/api/categories', categories);
 app.use('/api/orders', orders);
