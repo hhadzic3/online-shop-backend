@@ -12,12 +12,10 @@ require('dotenv').config()
 const hostname = process.env.HOST;
 const port = process.env.PORT;
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
 
 var cors = require('cors')
 
@@ -38,6 +36,6 @@ app.get('/api', function (req, res) {
 
 module.exports = app.listen(port || 8080, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
-    // Uncomment if you want to restart DB with default data
-    db.initialize();
+    // Uncomment if you want to restart DB
+    //db.initialize();
 });

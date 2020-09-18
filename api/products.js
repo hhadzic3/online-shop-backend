@@ -1,97 +1,132 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../db/db');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
-// GET sa query
-router.get('/', (req, res) => { 
-    let l = req.query.label;
-    let sort = req.query.sortby;
-    let order;
+// GET with query
+router.get('/', (req, res) => {
+    let label = req.query.label;
+    let limit = req.query.limit;
+    let price = req.query.price;
+    let category = req.query.category;
+    let subCategory = req.query.sub_category;
+    let sortby;
 
-    if (sort === undefined){
-        sort = 'price';
-        order = 'ASC'
+    if (limit === undefined)
+        limit = 9;
+
+    if (!req.query.sort) {
+        sortby = {
+            sort: 'label',
+            order: 'DESC'
+        }
+        limit = 15;
+    } else {
+        sortby = {
+            sort: req.query.sort,
+            order: req.query.order
+        }
     }
-    else if (sort === 'price_asc'){
-        sort = 'price';
-        order = 'ASC'
-    }        
-    else if (sort === 'price_desc'){
-        sort = 'price';
-        order = 'DESC'
-    }        
-    else if (sort === 'popularity'){
-        sort = 'stock';
-        order = 'ASC'
-    }        
-    else if (sort === 'rating'){
-        sort = 'stock';
-        order = 'asc'
-    }        
-    else if (sort === 'newness'){
-        sort = 'stock';
-        order = 'asc'
-    }        
-    else {
-        sort = 'price';
-        order = 'ASC'
+    const {sort, order} = sortby;
+
+    let where = {};    
+    if (label)
+        where.label = label;
+    if (price && price !== 'none')
+        where.price = {
+            [Op.lte]: price 
+        };
+        
+    let whereCategory = {};
+    if (category && category !== 'none' && subCategory && subCategory !== 'none'){
+        whereCategory = {
+            name: subCategory,
+            description: {
+                [Op.substring]: category
+            }
+        }
     }
 
-    if (l != undefined){
-        db.products.findAll(
-            {
-                where: {label:l},
-                order: [[sort, order]]
-            },
-        ).then(products => res.json(products))
-    }
-    else {
-        db.products.findAll().then(products => res.json(products))
-    }   
+    db.products.findAll({
+        limit: limit,
+        where: where,
+        order: [
+            [sort, order]
+        ],
+        include: [{
+            model: db.categories,
+            attributes: ['name'],
+            where: whereCategory
+        }]
+    }).then(products => res.json(products))
 });
 
-
 router.get('/:id', (req, res) => db.products.findOne({
-    where: {   id: req.params.id }}).then( data => { res.send(data) })   
-);
+    where: {
+        id: req.params.id
+    }
+}).then(data => {
+    res.send(data)
+}));
 
 // DELETE
-router.delete('/:id' , (req, res) => db.products.destroy({
-    where: {   id: req.params.id     }
- }).then( () => { res.json({ status : 'Deleted!'}) })  
-);
+router.delete('/:id', (req, res) => db.products.destroy({
+    where: {
+        id: req.params.id
+    }
+}).then(() => {
+    res.json({
+        status: 'Deleted!'
+    })
+}));
 
 
 // POST
-router.post('/' , function(req, res)  {
-    if ( !req.body.stock)
-        res.json({ error: 'Bad Data'})
-    db.products.create(req.body).then( data => { res.send(data) })
-    .catch( err => {
-        console.log(err); 
-        res.send(err)
-    })
+router.post('/', function (req, res) {
+    if (!req.body.stock)
+        res.json({
+            error: 'Bad Data'
+        })
+    db.products.create(req.body).then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            console.log(err);
+            res.send(err)
+        })
 });
 
 // PUT
-router.put('/:id' , function(req, res)  {
-    
-    if (req.params.id !== undefined){
-        if ( !req.body.stock )
-            res.json({ error: 'Bad Data' })
-        
+router.put('/:id', function (req, res) {
+
+    if (req.params.id !== undefined) {
+        if (!req.body.stock)
+            res.json({
+                error: 'Bad Data'
+            })
+
         var v = req.body;
-        
+
         db.products.update({
             name: v.name,
             price: v.price,
             weight: v.weight,
             description: v.description,
-            stock: v.stock 
-        }, { where: { id: req.params.id } }
-        ).then( () => { res.json({ status : 'Updated!'}) });
+            stock: v.stock
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }).then(() => {
+            res.json({
+                status: 'Updated!'
+            })
+        });
     }
-    res.json({ error: 'Error: ID is required!'})
+    res.json({
+        error: 'Error: ID is required!'
+    })
 });
 
 
