@@ -74,7 +74,6 @@ router.post('/login', (req, res) => {
                     let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
                         expiresIn: 1440
                     })
-                    //res.json({token: token})
                     res.send(token)
                 }
             } else {
@@ -82,7 +81,6 @@ router.post('/login', (req, res) => {
             }
         })
         .catch(err => {
-            // res.suatus(400).json({error: err})
             res.send('Error: ' + err)
         })
 })
@@ -108,8 +106,6 @@ router.post('/register', (req, res) => {
                             expiresIn: 1440
                         })
                         res.send(token)
-                        //res.json({ token: token })
-                        //or res.json({ status: user.email + 'Registered!' })
                     })
                     .catch(err => {
                         res.send('Error: ' + err)
