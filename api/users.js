@@ -74,8 +74,8 @@ router.post('/login', (req, res) => {
                     let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
                         expiresIn: 1440
                     })
-                    res.json({token: token})
-                    // ili res.send(token)
+                    //res.json({token: token})
+                    res.send(token)
                 }
             } else {
                 res.send('User does not exist')
@@ -107,7 +107,8 @@ router.post('/register', (req, res) => {
                         let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1440
                         })
-                        res.json({ token: token })
+                        res.send(token)
+                        //res.json({ token: token })
                         //or res.json({ status: user.email + 'Registered!' })
                     })
                     .catch(err => {
