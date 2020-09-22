@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
         description: DataTypes.STRING,
         label: {
             type: Sequelize.STRING,
-            validate:{ isIn: [["new_arrival","top_rated","last_chance" , "feature" , "classic"]] }
+            validate:{ isIn: [["new_arrival","top_rated","last_chance" , "feature" , "classic","sold"]] }
         },
         stock: DataTypes.INTEGER
     }, {

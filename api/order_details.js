@@ -3,7 +3,30 @@ var router = express.Router();
 const db = require('../db/db');
 
 router.get('/', (req, res) => { 
-    db.order_details.findAll().then(order_details => res.json(order_details))
+    let userId = req.query.user;
+    let label = req.query.label;
+
+    if (!userId || !label)
+        db.order_details.findAll().then(order_details => res.json(order_details))
+
+    db.order_details.findAll({
+        include: [{
+            model: db.products,
+            attributes: ['name','label','price'],
+            where: {
+                label: label
+            }
+        },
+        {
+            model: db.orders,
+            //attributes: ['full_name'],
+            where: {
+                customer_id: userId
+            }
+        }],
+    }
+    ).then(order_details => res.json(order_details))
+    
 });
 
 router.get('/:id', (req, res) => db.order_details.findOne({

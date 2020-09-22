@@ -1,6 +1,13 @@
 require('dotenv').config();
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(`${process.env.DB_URL}`) 
+const sequelize = new Sequelize(`${process.env.DB_URL}`, {
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
+}); 
 const path = require('path');
 
 const db = {};
@@ -40,7 +47,7 @@ db.users.hasMany(db.products, {
     }
 });
 db.products.belongsTo(db.users, {
-    as: 'seller',
+    //as: 'seller',
     foreignKey: {
         name: 'seller_id'
     }
@@ -54,7 +61,7 @@ db.products.hasMany(db.order_details, {
     }
 });
 db.order_details.belongsTo(db.products, {
-    as: 'productOrder',
+    //as: 'productOrder',
     foreignKey: {
         name: 'product_id'
     }
@@ -66,10 +73,10 @@ db.orders.hasMany(db.order_details, {
         name: 'order_id'
     }
 });
-db.order_details.belongsTo(db.products, {
-    as: 'orderDetails',
+db.order_details.belongsTo(db.orders, {
+    //as: 'orderDetails',
     foreignKey: {
-        name: 'product_id'
+        name: 'order_id'
     }
 });
 

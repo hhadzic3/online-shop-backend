@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
     let price = req.query.price;
     let category = req.query.category;
     let subCategory = req.query.sub_category;
+    let user = req.query.user;
     let sortby;
 
     if (limit === undefined)
@@ -48,18 +49,30 @@ router.get('/', (req, res) => {
         }
     }
 
-    db.products.findAll({
-        limit: limit,
-        where: where,
-        order: [
-            [sort, order]
-        ],
-        include: [{
-            model: db.categories,
-            attributes: ['name'],
-            where: whereCategory
-        }]
-    }).then(products => res.json(products))
+    // For Seller
+    if (user){
+        let where = {};
+        where.seller_id = user;    
+        if (label === 'sold')
+            where.label = label;
+        db.products.findAll({
+            where: where
+        }).then(products => res.json(products))
+    }
+    else{
+        db.products.findAll({
+            limit: limit,
+            where: where,
+            order: [
+                [sort, order]
+            ],
+            include: [{
+                model: db.categories,
+                attributes: ['name'],
+                where: whereCategory
+            }]
+        }).then(products => res.json(products))
+    }
 });
 
 router.get('/:id', (req, res) => db.products.findOne({
