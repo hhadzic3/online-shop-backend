@@ -1,5 +1,5 @@
 const db = require('./db/db');
-
+const bcrypt = require('bcrypt'); 
 function initialize() {
 	db.sequelize.sync({ force: true }).then(function () {
 	    dataInit().then(() => {
@@ -10,10 +10,10 @@ function initialize() {
 
 function dataInit() {
     const usersPromiseList = [
-        db.users.create({id: 1, email: "hamo@gmail.com",password: "hamo",full_name: "Hamo Hamic", billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'}),
-        db.users.create({id: 2, email: "memo@gmail.com",password: "memo",full_name: "Memo memic",
+        db.users.create({id: 1, email: "hamo@gmail.com",password: bcrypt.hashSync("hamo", 10),full_name: "Hamo Hamic", billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'}),
+        db.users.create({id: 2, email: "memo@gmail.com",password: bcrypt.hashSync("memo", 10),full_name: "Memo memic",
         billing_address: 'Hasana suceske 22', shipping_address: 'Hasana Suceske 22' , country: 'BiH' , phone: '033-456-123'}),
-        db.users.create({id: 3, email: "omar@gmail.com",password: "omar",full_name: "Omar Hodzic",
+        db.users.create({id: 3, email: "omar@gmail.com",password: bcrypt.hashSync("omar", 10),full_name: "Omar Hodzic",
         billing_address: 'Hasana suceske 11', shipping_address: 'Hasana Suceske 11' , country: 'BiH' , phone: '061-456-999'})
     ];
 
