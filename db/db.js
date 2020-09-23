@@ -87,7 +87,7 @@ db.users.hasMany(db.orders, {
     }
 });
 db.orders.belongsTo(db.users, {
-    as: 'userOrder',
+    //as: 'userOrder',
     foreignKey: {
         name: 'customer_id'
     }

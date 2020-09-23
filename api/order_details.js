@@ -50,13 +50,34 @@ router.post('/' , function(req, res)  {
     if ( !req.body.price)
         res.json({ error: 'Error: Price is required'})
 
-    db.order_details.create(req.body).then( data => {
-        res.send(data)
+    db.orders.create({
+        customer_id: req.body.order.customer_id,
+        ammount: req.body.order.ammount,
+        shipping_address: req.body.order.shipping_address,
+        order_address: req.body.order.order_address,
+        order_email: req.body.order.order_email,
+        order_date: req.body.order.order_date,
+        order_status: req.body.order.order_status,
+        payment_method: req.body.order.payment_method
+    })
+    .then( data => {
+        //res.send(data)
+        db.order_details.create({
+            product_id: req.body.product_id,
+            price: req.body.price,
+            quantity: req.body.quantity,
+            order_id: data.id
+        })
+        .then( data => {
+            res.send(data);
+        })
     })
     .catch( err => {
         console.log(err); 
-        res.send(err)
+        //res.send(err)
     })
+    
+    
 });
 
 module.exports = router;

@@ -55,6 +55,11 @@ router.get('/', (req, res) => {
         where.seller_id = user;    
         if (label === 'sold')
             where.label = label;
+        else {
+            where.label = {
+                [Op.ne]: 'sold'
+            }
+        }
         db.products.findAll({
             where: where
         }).then(products => res.json(products))
@@ -114,19 +119,13 @@ router.post('/', function (req, res) {
 router.put('/:id', function (req, res) {
 
     if (req.params.id !== undefined) {
-        if (!req.body.stock)
+        if (!req.body.label)
             res.json({
                 error: 'Bad Data'
             })
-
         var v = req.body;
-
         db.products.update({
-            name: v.name,
-            price: v.price,
-            weight: v.weight,
-            description: v.description,
-            stock: v.stock
+            label: v.label,
         }, {
             where: {
                 id: req.params.id
@@ -137,9 +136,11 @@ router.put('/:id', function (req, res) {
             })
         });
     }
+    else {
     res.json({
         error: 'Error: ID is required!'
     })
+    }
 });
 
 
