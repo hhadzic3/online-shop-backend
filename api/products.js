@@ -99,6 +99,12 @@ router.delete('/:id', (req, res) => db.products.destroy({
     })
 }));
 
+function randomNumber(min, max) {  
+    min = Math.ceil(min); 
+    max = Math.floor(max); 
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
+}  
+let numberOfProducts = 15;
 
 // POST
 router.post('/', function (req, res) {
@@ -106,13 +112,35 @@ router.post('/', function (req, res) {
         res.json({
             error: 'Bad Data'
         })
-    db.products.create(req.body).then(data => {
-            res.send(data)
-        })
-        .catch(err => {
-            console.log(err);
-            res.send(err)
-        })
+    db.products.create({
+        id: numberOfProducts + randomNumber(1,999),
+        name: req.body.name,
+        seller_id : req.body.seller_id,
+        price: req.body.price,
+        weight: req.body.weight,
+        description: req.body.description,
+        label: req.body.label,
+        stock: req.body.stock
+    }).then(data => {
+        req.body.categories.forEach(id => {
+            db.product_categories.create({
+                productId: data.id,
+                categoryId: id
+            })
+        });
+        req.body.subcategories.forEach(id => {
+            db.product_categories.create({
+                productId: data.id,
+                categoryId: id
+            })
+        });
+
+        res.sendStatus(200);
+    })
+    .catch(err => {
+        console.log(err);
+        res.send(err)
+    })
 });
 
 // PUT
