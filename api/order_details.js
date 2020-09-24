@@ -19,7 +19,6 @@ router.get('/', (req, res) => {
         },
         {
             model: db.orders,
-            //attributes: ['full_name'],
             where: {
                 customer_id: userId
             }

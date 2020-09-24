@@ -112,8 +112,9 @@ router.post('/', function (req, res) {
         res.json({
             error: 'Bad Data'
         })
+    const Pid = numberOfProducts + randomNumber(1,999);    
     db.products.create({
-        id: numberOfProducts + randomNumber(1,999),
+        id: Pid,
         name: req.body.name,
         seller_id : req.body.seller_id,
         price: req.body.price,
@@ -133,6 +134,14 @@ router.post('/', function (req, res) {
                 productId: data.id,
                 categoryId: id
             })
+        });
+        req.body.images.forEach(element => {
+            db.product_images.create({
+                product_id: data.id,
+                image: `/images/${element}`,
+            }).then((image) => {
+                
+            });
         });
 
         res.sendStatus(200);
