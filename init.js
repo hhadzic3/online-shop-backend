@@ -15,12 +15,13 @@ function dataInit() {
         billing_address: 'Bakije sokak 33', shipping_address: 'Titova 99' , country: 'BiH' , phone: '033-123-123'}),
         db.users.create({id: 2, email: "memo@gmail.com",password: bcrypt.hashSync("memo", 10),full_name: "Memo memic",
         billing_address: 'Hasana suceske 22', shipping_address: 'Hasana Suceske 22' , country: 'BiH' , phone: '033-456-123'}),
-        db.users.create({id: 3, email: "omar@gmail.com",password: bcrypt.hashSync("omar", 10),full_name: "Omar Hodzic",
+        db.users.create({id: 3, email: "harun@gmail.com",password: bcrypt.hashSync("harun", 10),full_name: "Omar Hodzic",
         billing_address: 'Hasana suceske 11', shipping_address: 'Hasana Suceske 11' , country: 'BiH' , phone: '061-456-999'})
     ];
 
     const ordersPromiseList = [
         db.orders.create({id: 1,customer_id:1,ammount:569,shipping_address: 'Titova 99',order_address: 'Bakije sokak 33', order_email: "Hhamo@gmail.com",order_date: "28.04.2020",  order_status: 'ordered' , payment_method:'handover'}),
+        db.orders.create({id: 2,customer_id:1,ammount:569,shipping_address: 'Titova 99',order_address: 'Bakije sokak 33', order_email: "Hhamo@gmail.com",order_date: "28.04.2020",  order_status: 'ordered' , payment_method:'handover'}),
     ];
 
     const categoriesPromiseListe = [
@@ -46,7 +47,7 @@ function dataInit() {
     ];
 
     const productsPromiseList = [
-        db.products.create({id: 1,seller_id:1 ,name: 'Shirt NIKE', price: 49 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"classic" , stock: 1}),
+        db.products.create({id: 1,seller_id:2 ,name: 'Shirt NIKE', price: 49 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"classic" , stock: 1}),
         db.products.create({id: 2,seller_id:2 ,name: 'Iphone 11', price: 1009 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"classic", stock: 1 }),
         db.products.create({id: 3,seller_id:2 ,name: 'HP laptop Probook', price: 2009 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"last_chance", stock: 1 }),
         db.products.create({id: 4,seller_id:2 ,name: 'Macbook PRO laptop Apple', price: 2009 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"last_chance", stock: 1 }),
@@ -59,7 +60,7 @@ function dataInit() {
         db.products.create({id: 11,seller_id:2 ,name: 'Shoes Nike', price: 109 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"new_arrival", stock: 1 }),
         db.products.create({id: 12,seller_id:2 ,name: 'Gucci glasses', price: 400 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"feature", stock: 1 }),
         db.products.create({id: 13,seller_id:2 ,name: 'Gucci belt', price: 400 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"feature", stock: 1 }),
-        db.products.create({id: 14,seller_id:2 ,name: 'Rolex watch', price: 400 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"feature", stock: 1 }),
+        db.products.create({id: 14,seller_id:2 ,name: 'Rolex watch', price: 400 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"sold", stock: 1 }),
         db.products.create({id: 15,seller_id:2 ,name: 'Ring Pandora', price: 300 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"sold", stock: 1 })
     ];
 
@@ -177,7 +178,8 @@ function dataInit() {
     ];
     
     const order_detailsPromiseList = [
-        db.order_details.create({id: 1, order_id:1 , product_id: 15 , price: 567 , quantity: 1 })
+        db.order_details.create({id: 1, order_id:1 , product_id: 15 , price: 567 , quantity: 1 }),
+        db.order_details.create({id: 2, order_id:1 , product_id: 14 , price: 10000 , quantity: 1 })
     ];
     
     return new Promise((resolve, reject) => {
