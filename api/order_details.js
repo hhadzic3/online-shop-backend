@@ -60,7 +60,7 @@ router.post('/' , function(req, res)  {
     db.orders.create({
         id: Pid,
         customer_id: req.body.order.customer_id,
-        ammount: req.body.order.ammount,
+        ammount: req.body.price,
         shipping_address: req.body.order.shipping_address,
         order_address: req.body.order.order_address,
         order_email: req.body.order.order_email,
@@ -86,10 +86,7 @@ router.post('/' , function(req, res)  {
     })
     .catch( err => {
         console.log(err); 
-        //res.send(err)
     })
-    
-    
 });
 
 module.exports = router;
