@@ -85,9 +85,17 @@ router.post('/login', (req, res) => {
         })
 })
 
+function randomNumber(min, max) {  
+    min = Math.ceil(min); 
+    max = Math.floor(max); 
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
+}  
+let numberOfUsers = 5;
+
 router.post('/register', (req, res) => {
 
     var userData = req.body;
+    console.log(userData.password);
 
     db.users.findOne({
             where: {
@@ -100,7 +108,16 @@ router.post('/register', (req, res) => {
                 const hash = bcrypt.hashSync(userData.password, 10)
                 userData.password = hash;
 
-                db.users.create(userData)
+                db.users.create({
+                    id: numberOfUsers + randomNumber(1,999),  
+                    email: userData.email,
+                    password: userData.password,
+                    full_name: userData.full_name,
+                    billing_address: userData.billing_address,
+                    shipping_address: userData.shipping_address,
+                    country: userData.country,
+                    phone: userData.phone
+                    })
                     .then(user => {
                         let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
                             expiresIn: 1440
