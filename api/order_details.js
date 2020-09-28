@@ -44,21 +44,12 @@ router.delete('/:id' , (req, res) =>
     })  
 );
 
-function randomNumber(min, max) {  
-    min = Math.ceil(min); 
-    max = Math.floor(max); 
-    return Math.floor(Math.random() * (max - min + 1)) + min; 
-}  
-let numberOfOrders = 5;
-
 // POST
 router.post('/' , function(req, res)  {
     if ( !req.body.price)
         res.json({ error: 'Error: Price is required'})
-
-    const Pid = numberOfOrders + randomNumber(1,999);  
+ 
     db.orders.create({
-        id: Pid,
         customer_id: req.body.order.customer_id,
         ammount: req.body.price,
         shipping_address: req.body.order.shipping_address,
@@ -69,9 +60,7 @@ router.post('/' , function(req, res)  {
         payment_method: req.body.order.payment_method
     })
     .then( data => {
-        //res.send(data)
         db.order_details.create({
-            id : 5 + randomNumber(1,999),
             product_id: req.body.product_id,
             price: req.body.price,
             quantity: req.body.quantity,

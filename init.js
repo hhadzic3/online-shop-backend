@@ -19,11 +19,6 @@ function dataInit() {
         billing_address: 'Hasana suceske 11', shipping_address: 'Hasana Suceske 11' , country: 'BiH' , phone: '061-456-999'})
     ];
 
-    const ordersPromiseList = [
-       /* db.orders.create({id: 1,customer_id:1,ammount:569,shipping_address: 'Titova 99',order_address: 'Bakije sokak 33', order_email: "Hhamo@gmail.com",order_date: "28.04.2020",  order_status: 'ordered' , payment_method:'handover'}),
-        db.orders.create({id: 2,customer_id:1,ammount:569,shipping_address: 'Titova 99',order_address: 'Bakije sokak 33', order_email: "Hhamo@gmail.com",order_date: "28.04.2020",  order_status: 'ordered' , payment_method:'handover'}),*/
-    ];
-
     const categoriesPromiseListe = [
         db.categories.create({id:1 , name: 'Male' , description: 'primary'}),
         db.categories.create({id:2 , name: 'Female' , description: 'primary'}),
@@ -55,7 +50,7 @@ function dataInit() {
         db.products.create({id: 4,seller_id:2 ,name: 'Macbook PRO laptop Apple', price: 2009 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"last_chance", stock: 1 }),
         db.products.create({id: 5,seller_id:2 ,name: 'Mac Apple Computer', price: 2009 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"last_chance", stock: 1 }),
         db.products.create({id: 6,seller_id:2 ,name: 'Shirt Hugo Boss', price: 59 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"top_rated", stock: 1 }),
-       db.products.create({id: 7,seller_id:2 ,name: 'Barbecue', price: 270 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"top_rated", stock: 1 }),
+        db.products.create({id: 7,seller_id:2 ,name: 'Barbecue', price: 270 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"top_rated", stock: 1 }),
         db.products.create({id: 8,seller_id:2 ,name: 'Ipad Pro Apple', price: 590 , weight: 1 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"top_rated", stock: 1 }),
         db.products.create({id: 9,seller_id:2 ,name: 'Tesla electric car', price: 109000 , weight: 100 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"new_arrival", stock: 1 }),
         db.products.create({id: 10,seller_id:2 ,name: 'Bad for kids', price: 1090 , weight: 25 , description: 'The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.',label:"new_arrival", stock: 1 }),
@@ -179,18 +174,13 @@ function dataInit() {
         db.product_images.create({product_id:15,image:'/images/ring.jpg'}),
     ];
     
-    const order_detailsPromiseList = [
-        //db.order_details.create({id: 1, order_id:1 , product_id: 15 , price: 567 , quantity: 1 }),
-        //db.order_details.create({id: 2, order_id:1 , product_id: 14 , price: 10000 , quantity: 1 })
-    ];
+   
     
     return new Promise((resolve, reject) => {
         Promise.all(usersPromiseList)
         .then(() => Promise.all(categoriesPromiseListe).then(all => resolve(all))) 
         .then(() => Promise.all(productsPromiseList).then(all => resolve(all)))
-        .then(() => Promise.all(ordersPromiseList).then(all => resolve(all)))
         .then(() => Promise.all(product_categoriesPromiseList).then(all => resolve(all)))
-        .then(() => Promise.all(order_detailsPromiseList).then(all => resolve(all)))
         .then(() => Promise.all(product_imagesPromiseList).then(all => resolve(all)))
         .catch(reason => reject(reason));
     });
