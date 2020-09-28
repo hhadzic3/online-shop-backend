@@ -142,8 +142,7 @@ function dataInit() {
 
     const product_imagesPromiseList = [
         db.product_images.create({product_id:1,image:'/images/t-shirtNike.jpeg'}),
-        db.product_images.create({product_id:1,image:'/images/tshirtBoss.jpg'}),
-        db.product_images.create({product_id:1,image:'/images/shirt.jpg'}),
+
         db.product_images.create({product_id:2,image:'/images/iphone11.png'}),
         db.product_images.create({product_id:2,image:'/images/iphone11.png'}),
 
