@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../db/db');
+var multer = require('multer')
 
 router.get('/', (req, res) => 
     db.product_images.findAll()
@@ -55,7 +56,11 @@ router.delete('/:id' , (req, res) =>
         res.json({ status : 'Deleted!'})
     })  
 );
+const uploadController = require("./controller/upload");
+const upload = require("./middleware/upload");
 
+router.post("/upload",  uploadController.multipleUpload);
+        
 // POST
 router.post('/' , function(req, res)  {
     if ( !req.body.image)
@@ -68,8 +73,5 @@ router.post('/' , function(req, res)  {
             res.send(err)
         })
 });
-
-
-
 
 module.exports = router;

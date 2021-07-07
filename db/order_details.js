@@ -10,7 +10,10 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
         order_id: DataTypes.INTEGER,
-        product_id: DataTypes.INTEGER,
+        product_id:{
+            type: DataTypes.INTEGER,
+            unique: true
+        },
         price: DataTypes.INTEGER,
         quantity: DataTypes.INTEGER
     }, {
